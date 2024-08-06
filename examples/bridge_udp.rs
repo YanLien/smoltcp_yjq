@@ -33,9 +33,13 @@ fn main() {
         2 // 最大端口数
     );
 
+    // // 添加端口到网桥
+    // bridge.add_port(iface1, device1).expect("Failed to add port 1");
+    // bridge.add_port(iface2, device2).expect("Failed to add port 2");
+
     // 添加端口到网桥
-    bridge.add_port(iface1, device1).expect("Failed to add port 1");
-    bridge.add_port(iface2, device2).expect("Failed to add port 2");
+    bridge.add_port(iface1, device1, 1).expect("Failed to add port 1");
+    bridge.add_port(iface2, device2, 2).expect("Failed to add port 2");
 
     println!("Bridge initialized with 2 ports");
 

@@ -11,7 +11,7 @@ where
     pub bridge: Weak<Mutex<Bridge<D>>>,     // 指向所属网桥的指针
     pub port_iface: Interface,              // 端口对应的 netif
     pub port_device: D,                     // 端口对应的设备
-    pub port_num: u32,                      // 端口号
+    // pub port_num: u32,                      // 端口号
 }
 
 impl<D> BridgePort<D>
@@ -154,7 +154,7 @@ where
     pub ethaddr: EthernetAddress,       // 网桥的 MAC 地址
     pub max_ports: u8,                  // 端口的最大数量
     pub num_ports: u8,                  // 端口的当前数量
-    pub ports: Vec<BridgePort<D>>,      // 端口的指针
+    pub ports: HashMap<u32, BridgePort<D>>,      // 端口的指针
     pub fdb_static: BridgeSfdb,
     pub fdb_dynamic: BridgeDfdb,
 }
@@ -168,7 +168,7 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
             ethaddr,
             max_ports,
             num_ports: 0,
-            ports: Vec::new(),
+            ports: HashMap::new(),
             fdb_static: BridgeSfdb::new(MAX_FDB_ENTRIES as u16), // 假设最大静态表项为1024
             fdb_dynamic: BridgeDfdb::new(MAX_FDB_ENTRIES as u16), // 假设最大动态表项为1024
         })))
@@ -178,7 +178,7 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
         self.0.clone()
     }
 
-    pub fn add_port(&self, port_iface: Interface, port_device: D) -> Result<(), &'static str> {
+    pub fn add_port(&self, port_iface: Interface, port_device: D, port_num: u32) -> Result<(), &'static str> {
         let mut bridge = self.0.lock().unwrap();
         if bridge.num_ports >= bridge.max_ports {
             return Err("Maximum number of ports reached");
@@ -188,10 +188,10 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
             bridge: Arc::downgrade(&self.0),
             port_iface,
             port_device,
-            port_num: bridge.num_ports as u32,
+            // port_num,
         };
 
-        bridge.ports.push(port);
+        bridge.ports.insert(port_num, port);
         bridge.num_ports += 1;
         Ok(())
     }
@@ -210,11 +210,14 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
 
         // 决定转发端口
         let out_ports = bridge.decide_forward_ports(&dst_addr, in_port);
+        println!("transport port {:?}", out_ports);
 
         // 转发帧
         for &port_num in &out_ports {
-            if let Some(port) = bridge.ports.get_mut(port_num as usize) {
+            if let Some(port) = bridge.ports.get_mut(&(port_num as u32)) {
                 Self::forward_frame(&frame, port)?;
+            } else {
+                Err("Port not found")?;
             }
         }
 
@@ -238,34 +241,28 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
     pub fn receive_frame(&self) -> Option<(u8, Vec<u8>)> {
         let mut bridge = self.0.lock().unwrap();
         
-        // 遍历所有端口
-        for (port_index, port) in bridge.ports.iter_mut().enumerate() {
+        for (port_num, port) in bridge.ports.iter_mut() {
             let time = Instant::now();
             
-            // 尝试从端口接收数据
             if let Some((rx_token, _)) = port.port_device.receive(time) {
-                let result = rx_token.consume(|buffer| {
-                    // 创建一个新的缓冲区来存储接收到的数据
+                if let Some(frame_data) = rx_token.consume(|buffer| {
                     let frame_buffer = buffer.to_vec();
-
-                    // 验证以太网帧
-                    if let Ok(_) = EthernetFrame::new_checked(&frame_buffer) {
-                        println!("Received valid frame on port {}", port_index);
-                        Some(frame_buffer)
-                    } else {
-                        println!("Received invalid frame on port {}", port_index);
-                        None
+                    match EthernetFrame::new_checked(&frame_buffer) {
+                        Ok(_) => {
+                            println!("Received valid frame on port {}", port_num);
+                            Some(frame_buffer)
+                        }
+                        Err(_) => {
+                            println!("Received invalid frame on port {}", port_num);
+                            None
+                        }
                     }
-                });
-
-                // 如果成功接收到帧，返回端口号和原始帧数据
-                if let Some(frame_data) = result {
-                    return Some((port_index as u8, frame_data));
+                }) {
+                    return Some((*port_num as u8, frame_data));
                 }
             }
         }
-
-        // 如果所有端口都没有接收到帧，返回 None
+    
         None
     }
 
@@ -285,7 +282,6 @@ impl<D: for<'a> Device> Bridge<D> {
         // 检查静态 FDB
         if let Some(entry) = self.fdb_static.get_entry(dst_addr) {
             println!("Static FDB {}", entry.dst_ports);
-            println!("{:?}", vec![entry.dst_ports as u8]);
             return vec![entry.dst_ports as u8];
         }
 
