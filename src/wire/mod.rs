@@ -77,6 +77,9 @@ mod field {
 
 pub mod pretty_print;
 
+pub mod bridge;
+pub mod bridge_fdb;
+
 #[cfg(all(feature = "proto-ipv4", feature = "medium-ethernet"))]
 mod arp;
 #[cfg(feature = "proto-dhcpv4")]
