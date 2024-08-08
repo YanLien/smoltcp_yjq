@@ -150,11 +150,11 @@ pub struct Bridge<D>
 where
     D: for<'a> Device,
 {
-    pub iface: Interface,               // 网桥自己的netif
-    pub ethaddr: EthernetAddress,       // 网桥的 MAC 地址
-    pub max_ports: u8,                  // 端口的最大数量
-    pub num_ports: u8,                  // 端口的当前数量
-    pub ports: HashMap<u32, BridgePort<D>>,      // 端口的指针
+    pub iface: Interface,                       // 网桥自己的netif
+    pub ethaddr: EthernetAddress,               // 网桥的 MAC 地址
+    pub max_ports: u8,                          // 端口的最大数量
+    pub num_ports: u8,                          // 端口的当前数量
+    pub ports: HashMap<u32, BridgePort<D>>,     // 端口的指针
     pub fdb_static: BridgeSfdb,
     pub fdb_dynamic: BridgeDfdb,
 }
@@ -169,8 +169,8 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
             max_ports,
             num_ports: 0,
             ports: HashMap::new(),
-            fdb_static: BridgeSfdb::new(MAX_FDB_ENTRIES as u16), // 假设最大静态表项为1024
-            fdb_dynamic: BridgeDfdb::new(MAX_FDB_ENTRIES as u16), // 假设最大动态表项为1024
+            fdb_static: BridgeSfdb::new(MAX_FDB_ENTRIES as u16),    // 假设最大静态表项为 1024
+            fdb_dynamic: BridgeDfdb::new(MAX_FDB_ENTRIES as u16),   // 假设最大动态表项为 1024
         })))
     }
 
@@ -240,10 +240,12 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
 
     pub fn receive_frame(&self) -> Option<(u8, Vec<u8>)> {
         let mut bridge = self.0.lock().unwrap();
-        
         for (port_num, port) in bridge.ports.iter_mut() {
+            // println!("{}", port_num);
             let time = Instant::now();
-            
+        
+            // println!("{}", port.port_device.m);
+
             if let Some((rx_token, _)) = port.port_device.receive(time) {
                 if let Some(frame_data) = rx_token.consume(|buffer| {
                     let frame_buffer = buffer.to_vec();
