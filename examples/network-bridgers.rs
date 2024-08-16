@@ -1,4 +1,4 @@
-use std::sync::{Arc, Mutex};
+use std::sync::Mutex;
 use std::time::Duration;
 use std::thread;
 
@@ -79,8 +79,9 @@ fn sender_thread() {
         let src_mac = EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]);
         let dst_mac = EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02]);
 
-        let mut buffer = vec![0u8; 64 + message.len()];
-        let mut frame = EthernetFrame::new_unchecked(&mut buffer);
+        let mut buffer_vec = vec![0u8; 64 + message.len()];
+        let buffer = buffer_vec.as_mut_slice();
+        let mut frame = EthernetFrame::new_unchecked(buffer);
         frame.set_src_addr(src_mac);
         frame.set_dst_addr(dst_mac);
         frame.set_ethertype(EthernetProtocol::Ipv4);
@@ -107,7 +108,8 @@ fn sender_thread() {
         udp_payload[..message.len()].copy_from_slice(message.as_bytes());
 
         let bridge = BRIDGE.lock().unwrap();
-        match bridge.process_frame(&frame, 0) {
+        let iframe = EthernetFrame::new_unchecked(frame.as_ref());
+        match bridge.process_frame(&iframe, 0) {
             Ok(_) => println!("Frame processed successfully"),
             Err(e) => println!("Error processing frame: {}", e),
         }

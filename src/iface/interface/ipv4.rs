@@ -235,6 +235,8 @@ impl InterfaceInner {
         let arp_packet = check!(ArpPacket::new_checked(eth_frame.payload()));
         let arp_repr = check!(ArpRepr::parse(&arp_packet));
 
+        println!("{}", arp_repr);
+
         match arp_repr {
             ArpRepr::EthernetIpv4 {
                 operation,
@@ -243,6 +245,10 @@ impl InterfaceInner {
                 target_protocol_addr,
                 ..
             } => {
+                println!("{}", target_protocol_addr);
+                println!("{}", source_protocol_addr);
+                println!("{}", source_hardware_addr);
+
                 // Only process ARP packets for us.
                 if !self.has_ip_addr(target_protocol_addr) && !self.any_ip {
                     return None;

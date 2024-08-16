@@ -1,5 +1,5 @@
 use core::time::Duration;
-use std::collections::HashMap;
+use std::collections::{hash_map, HashMap};
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use super::EthernetAddress;
@@ -87,7 +87,7 @@ impl BridgeDfdb {
         }
         
         match fdb.entry(*src_addr) {
-            std::collections::hash_map::Entry::Occupied(mut entry) => {
+            hash_map::Entry::Occupied(mut entry) => {
                 let entry = entry.get_mut();
                 if entry.ts.elapsed() < BR_FDB_TIMEOUT_SEC {
                     println!("br: update src {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x} (from {}) @ existing entry",
@@ -107,7 +107,7 @@ impl BridgeDfdb {
                              port_idx);
                 }
             },
-            std::collections::hash_map::Entry::Vacant(entry) => {
+            hash_map::Entry::Vacant(entry) => {
                 entry.insert(BridgeDfdbEntry {
                     used: true,
                     port: port_idx,

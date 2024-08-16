@@ -177,7 +177,7 @@ impl<T: AsRef<[u8]> + AsMut<[u8]>> Frame<T> {
     /// Set the destination address field.
     #[inline]
     pub fn set_dst_addr(&mut self, value: Address) {
-        let data = self.buffer.as_mut();
+        let data: &mut [u8] = self.buffer.as_mut();
         data[field::DESTINATION].copy_from_slice(value.as_bytes())
     }
 

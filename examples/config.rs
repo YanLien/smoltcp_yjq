@@ -5,7 +5,7 @@ use smoltcp::phy::Loopback;
 use smoltcp::phy::Medium;
 use smoltcp::time::Instant;
 use smoltcp::wire::bridge::BridgeWrapper;
-use smoltcp::wire::{EthernetAddress, HardwareAddress, Ipv4Address};
+use smoltcp::wire::{EthernetAddress, HardwareAddress};
 
 pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
 pub const PORT1_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x01];
@@ -38,8 +38,8 @@ lazy_static! {
         let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
         let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
 
-        let mut iface1 = Interface::new(config1, &mut device1, time);
-        let mut iface2 = Interface::new(config2, &mut device2, time);
+        let iface1 = Interface::new(config1, &mut device1, time);
+        let iface2 = Interface::new(config2, &mut device2, time);
 
         // iface1.update_ip_addrs(|addrs| {
         //     addrs.push(IpCidr::new(IpAddress::from(SENDER_IP), 24)).unwrap();

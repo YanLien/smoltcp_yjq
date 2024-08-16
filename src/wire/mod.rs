@@ -79,6 +79,7 @@ pub mod pretty_print;
 
 pub mod bridge;
 pub mod bridge_fdb;
+pub mod global_bridge;
 
 #[cfg(all(feature = "proto-ipv4", feature = "medium-ethernet"))]
 mod arp;

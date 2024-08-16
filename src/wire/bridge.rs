@@ -1,8 +1,10 @@
+use core::fmt::{self, Debug};
 use std::{collections::HashMap, sync::{Arc, Mutex, Weak}};
-use crate::phy::RxToken;
+use crate::phy::{self, RxToken};
 use crate::{iface::Interface, phy::{Device, DeviceCapabilities, TxToken}, time::Instant};
-
 use super::{bridge_fdb::{BridgeDfdb, BridgeifPortmask, BR_FLOOD, MAX_FDB_ENTRIES}, EthernetAddress, EthernetFrame};
+
+const MAX_FRAME_SIZE: usize = 1522; // 略大于标准以太网帧的最大大小
 
 pub struct BridgePort<D>
 where
@@ -11,15 +13,16 @@ where
     pub bridge: Weak<Mutex<Bridge<D>>>,     // 指向所属网桥的指针
     pub port_iface: Interface,              // 端口对应的 netif
     pub port_device: D,                     // 端口对应的设备
-    // pub port_num: u32,                      // 端口号
+    pub port_num: u32,                      // 端口号
 }
 
 impl<D> BridgePort<D>
 where
     D: for<'a> Device,
 {
-    pub fn send(&mut self, frame: &EthernetFrame<&[u8]>) -> Result<(), ()> {
+    pub fn send(&mut self, frame: &EthernetFrame<&mut [u8]>) -> Result<(), ()> {
         let time = Instant::now();
+
         let tx_token = self.port_device.transmit(time).unwrap();
         tx_token.consume(frame.as_ref().len(), |buffer| {
             buffer[..frame.as_ref().len()].copy_from_slice(frame.as_ref());
@@ -28,8 +31,39 @@ where
         Ok(())
     }
 
+    pub fn recv(&mut self) -> Option<[u8; MAX_FRAME_SIZE]> {
+        let time = Instant::now();
+        self.port_device.receive(time).and_then(|(rx_token, _)| {
+            rx_token.consume(|buffer| {
+                if buffer.len() > MAX_FRAME_SIZE {
+                    println!("Received frame too large, truncating");
+                    return None;
+                }
+
+                let mut frame_buffer = [0u8; MAX_FRAME_SIZE];
+                frame_buffer[..buffer.len()].copy_from_slice(buffer);
+
+                match EthernetFrame::new_checked(&frame_buffer[..buffer.len()]) {
+                    Ok(_) => {
+                        println!("Received valid frame on port");
+                        Some(frame_buffer)
+                    }
+                    Err(_) => {
+                        println!("Received invalid frame on port");
+                        None
+                    }
+                }
+            })
+        })
+    }
+
     pub fn capabilities(&self) -> DeviceCapabilities {
         self.port_device.capabilities()
+    }
+
+    pub fn get_port_num(&self, ) -> Option<u32> {
+
+        todo!("Implement get_port_num")
     }
 }
 
@@ -159,7 +193,16 @@ where
     pub fdb_dynamic: BridgeDfdb,
 }
 
+#[derive(Clone)]
 pub struct BridgeWrapper<D: for<'a> Device>(Arc<Mutex<Bridge<D>>>);
+
+impl<D: phy::Device + 'static> Debug for BridgeWrapper<D> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("BridgeWrapper")
+            .field("is_some", &true)
+            .finish()
+    }
+}
 
 impl<D: for<'a> Device> BridgeWrapper<D> {
     pub fn new(iface: Interface, ethaddr: EthernetAddress, max_ports: u8) -> Self {
@@ -178,6 +221,11 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
         self.0.clone()
     }
 
+    pub fn num_ports(&self) -> u8 {
+        let bridge = self.0.lock().unwrap();
+        bridge.num_ports
+    }
+
     pub fn add_port(&self, port_iface: Interface, port_device: D, port_num: u32) -> Result<(), &'static str> {
         let mut bridge = self.0.lock().unwrap();
         if bridge.num_ports >= bridge.max_ports {
@@ -188,7 +236,7 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
             bridge: Arc::downgrade(&self.0),
             port_iface,
             port_device,
-            // port_num,
+            port_num,
         };
 
         bridge.ports.insert(port_num, port);
@@ -196,7 +244,7 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
         Ok(())
     }
 
-    pub fn process_frame(&self, frame: &EthernetFrame<&mut Vec<u8>>, in_port: u8) -> Result<(), &'static str> {
+    pub fn process_frame(&self, frame: &EthernetFrame<&[u8]>, in_port: u8) -> Result<(), &'static str> {
         let mut bridge = self.0.lock().unwrap();
         let src_addr = frame.src_addr();
         let dst_addr = frame.dst_addr();
@@ -224,11 +272,11 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
         Ok(())
     }
 
-    fn forward_frame(frame: &EthernetFrame<&mut Vec<u8>>, port: &mut BridgePort<D>) -> Result<(), &'static str> {
+    fn forward_frame(frame: &EthernetFrame<&[u8]>, port: &mut BridgePort<D>) -> Result<(), &'static str> {
         let tx_token = port.port_device.transmit(Instant::now()).expect("Failed to acquire transmit token");
         tx_token.consume(frame.as_ref().len(), |buffer| {
             buffer.copy_from_slice(frame.as_ref());
-            println!("{:?}", buffer);
+            println!("buffer {:?}", buffer);
         });
         Ok(())
     }
@@ -268,10 +316,33 @@ impl<D: for<'a> Device> BridgeWrapper<D> {
         None
     }
 
-    // pub fn get_port(&self, index: usize) -> Option<Cow<BridgePort<D>>> {
-    //     let bridge = self.0.lock().unwrap();
-    //     bridge.ports.get(index).map(|port| Cow::Borrowed(port))
-    // }
+    pub fn fdb_add(&mut self, addr: &EthernetAddress, ports: usize) -> Result<(), &'static str> {
+        let bridge = self.0.lock().unwrap();
+        bridge.fdb_static.add_entry(*addr, ports)
+    }
+
+    pub fn fdb_remove(&mut self, addr: &EthernetAddress) -> Result<(), &'static str> {
+        let bridge = self.0.lock().unwrap();
+        bridge.fdb_static.remove_entry(addr)
+    }
+
+    pub fn find_dst_ports(&self, dst_addr: &EthernetAddress) -> BridgeifPortmask {
+        let bridge = self.0.lock().unwrap();
+        // 首先检查静态FDB
+        if let Some(entry) = bridge.fdb_static.get_entry(dst_addr) {
+            return entry.dst_ports;
+        }
+
+        // 然后检查动态FDB
+        bridge.fdb_dynamic.get_dst_ports(dst_addr)
+    }
+
+    pub fn get_port(&self, netif: &Interface) -> Option<u32> {
+        let bridge = self.0.lock().unwrap();
+        bridge.ports.iter()
+            .find(|(_, bridge_port)| bridge_port.port_iface == *netif)
+            .map(|(port_num, _)| *port_num)
+    }
 
     // pub fn get_port_mut(&mut self, index: usize) -> Option<&mut BridgePort<D>> {
     //     let mut bridge = self.0.lock().unwrap();
@@ -327,4 +398,11 @@ impl<D: for<'a> Device> Bridge<D> {
         // 如果静态表中没有找到匹配项，则检查动态转发表
         self.fdb_dynamic.get_dst_ports(dst_addr)  // 调用动态转发表的方法
     }
+
+    // // 根据Interface实现对应端口的查找
+    // pub fn get_port(&self, netif: &Interface) -> Option<u32> {
+    //     self.ports.iter()
+    //         .find(|(_, bridge_port)| bridge_port.port_iface == *netif)
+    //         .map(|(port_num, _)| *port_num)
+    // }
 }

@@ -1,0 +1,5119 @@
+Added static FDB entry: 02:00:00:00:00:01 -> Port 1
+Added static FDB entry: 02:00:00:00:00:02 -> Port 2
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Sent data successfully
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+Loopback::transmit
+socket_egress: mac_addr NotFound
+socket_egress: neighbor_addr Some(Ipv4(Address([192, 168, 1, 101])))
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+socket_ingress: src_mac: Address([2, 0, 0, 0, 0, 1])
+socket_ingress: dst_mac: Address([255, 255, 255, 255, 255, 255])
+2
+Some(2)
+ethertype ARP
+ARP type=Ethernet+IPv4 src=02-00-00-00-00-01/192.168.1.100 tgt=ff-ff-ff-ff-ff-ff/192.168.1.101 op=Request
+192.168.1.101
+192.168.1.100
+02-00-00-00-00-01
+Received frame from port 1
+Static FDB 2
+transport port [2]
+Loopback::transmit
+buffer [255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 0, 1, 8, 6, 0, 1, 8, 0, 6, 4, 0, 1, 2, 0, 0, 0, 0, 1, 192, 168, 1, 100, 255, 255, 255, 255, 255, 255, 192, 168, 1, 101]
+Loopback::receive
+poll: did_something_socket_ingress: true
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: true
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false
+Loopback::receive
+poll: did_something_socket_ingress: false
+socket_egress: src_mac 02-00-00-00-00-01
+poll: did_something_socket_egress: false
+Flags: false

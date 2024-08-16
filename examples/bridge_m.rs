@@ -80,7 +80,10 @@ fn main() {
         };
 
         let mut buffer = vec![0u8; 64 + message.len()];
-        let mut frame = EthernetFrame::new_unchecked(&mut buffer);
+        
+        let buffer_slice: &mut [u8] = buffer.as_mut_slice();
+
+        let mut frame = EthernetFrame::new_unchecked(buffer_slice);
         frame.set_src_addr(src_mac);
         frame.set_dst_addr(dst_mac);
         frame.set_ethertype(EthernetProtocol::Ipv4);
@@ -110,7 +113,8 @@ fn main() {
         udp_payload[..message.len()].copy_from_slice(message.as_bytes());
 
         let src_port = if i % 2 == 0 { 0 } else { 1 };
-        match bridge.process_frame(&frame, src_port) {
+        let iframe = EthernetFrame::new_unchecked(frame.as_ref());
+        match bridge.process_frame(&iframe, src_port) {
             Ok(_) => {
                 println!("Frame processed successfully");
                 message_queue.push_back(buffer.to_vec());

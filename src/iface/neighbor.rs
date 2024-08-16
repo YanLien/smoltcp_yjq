@@ -42,7 +42,7 @@ impl Answer {
 }
 
 /// A neighbor cache backed by a map.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Cache {
     storage: LinearMap<IpAddress, Neighbor, IFACE_NEIGHBOR_CACHE_COUNT>,
     silent_until: Instant,

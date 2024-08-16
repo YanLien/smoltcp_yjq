@@ -18,8 +18,9 @@ fn sender() {
     for (i, message) in messages.iter().enumerate() {
         println!("\nTransmitting message {}: {}", i + 1, message);
 
-        let mut buffer = vec![0u8; 64 + message.len()];
-        let mut frame = EthernetFrame::new_unchecked(&mut buffer);
+        let mut buffer_vec = vec![0u8; 64 + message.len()];
+        let buffer = buffer_vec.as_mut_slice();
+        let mut frame = EthernetFrame::new_unchecked(buffer);
         frame.set_src_addr(get_port1_mac());
         frame.set_dst_addr(get_port2_mac());
         frame.set_ethertype(EthernetProtocol::Ipv4);
@@ -46,7 +47,8 @@ fn sender() {
         udp_payload[..message.len()].copy_from_slice(message.as_bytes());
 
         let bridge = BRIDGE.lock().unwrap();
-        match bridge.process_frame(&frame, 0) {
+        let iframe = EthernetFrame::new_unchecked(frame.as_ref());
+        match bridge.process_frame(&iframe, 0) {
             Ok(_) => {
                 println!("Frame processed successfully");
             },

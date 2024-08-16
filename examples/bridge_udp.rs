@@ -1,154 +1,169 @@
-use smoltcp::iface::{Config, Interface};
-use smoltcp::phy::{Loopback, Medium};
-use smoltcp::time::Instant;
-use smoltcp::wire::bridge::BridgeWrapper;
-use smoltcp::wire::{EthernetAddress, EthernetFrame, EthernetProtocol, HardwareAddress, Ipv4Address, Ipv4Packet, UdpPacket};
+use std::sync::{Arc, Mutex};
+use std::thread;
 
-fn main() {
+use smoltcp::iface::{Config, Interface, SocketSet};
+use smoltcp::phy::{Loopback, Medium};
+use smoltcp::socket::udp::{PacketMetadata, Socket, PacketBuffer};
+use smoltcp::time::Instant;
+use smoltcp::wire::global_bridge::{add_port, initialize_bridge, GlobalBridgeInner, GLOBAL_BRIDGE};
+use smoltcp::wire::{EthernetAddress, HardwareAddress, IpAddress, IpCidr};
+
+pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
+pub const PORT1_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x01];
+pub const PORT2_MAC: [u8; 6] = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF];
+pub const MAX_PORTS: u8 = 2;
+
+// pub const SENDER_IP: Ipv4Address = Ipv4Address::new(192, 168, 0, 1);
+// pub const RECEIVER_IP: Ipv4Address = Ipv4Address::new(192, 168, 0, 2);
+// pub const SENDER_PORT: u16 = 12345;
+// pub const RECEIVER_PORT: u16 = 54321;
+
+pub fn get_bridge_mac() -> EthernetAddress {
+    EthernetAddress::from_bytes(&BRIDGE_MAC)
+}
+
+pub fn get_port1_mac() -> EthernetAddress {
+    EthernetAddress::from_bytes(&PORT1_MAC)
+}
+
+pub fn get_port2_mac() -> EthernetAddress {
+    EthernetAddress::from_bytes(&PORT2_MAC)
+}
+
+fn buffer(packets: usize) -> PacketBuffer<'static> {
+    PacketBuffer::new(
+        (0..packets)
+            .map(|_| PacketMetadata::EMPTY)
+            .collect::<Vec<_>>(),
+        vec![0; 16 * packets],
+    )
+}
+
+// Global bridge variable
+fn config() {
     let time = Instant::now();
-    // 创建两个虚拟网络设备
     let mut device1 = Loopback::new(Medium::Ethernet);
     let mut device2 = Loopback::new(Medium::Ethernet);
 
-    let config1 = Config::new(HardwareAddress::Ethernet(
-        EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01])
-    ));
+    let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
+    let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
 
-    let config2 = Config::new(HardwareAddress::Ethernet(
-        EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02])
-    ));
-
-    // 创建对应的网络接口
     let iface1 = Interface::new(config1, &mut device1, time);
     let iface2 = Interface::new(config2, &mut device2, time);
 
-    let config = Config::new(HardwareAddress::Ethernet(
-        EthernetAddress::from_bytes(&[0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc])
-    ));
+    let config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 
     // 初始化网桥
-    let bridge = BridgeWrapper::new(
+    initialize_bridge(
         Interface::new(config, &mut Loopback::new(Medium::Ethernet), time),
         EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x00]),
         2 // 最大端口数
-    );
-
-    // // 添加端口到网桥
-    // bridge.add_port(iface1, device1).expect("Failed to add port 1");
-    // bridge.add_port(iface2, device2).expect("Failed to add port 2");
+    ).unwrap();
 
     // 添加端口到网桥
-    bridge.add_port(iface1, device1, 1).expect("Failed to add port 1");
-    bridge.add_port(iface2, device2, 2).expect("Failed to add port 2");
+    add_port(iface1, device1, 1).expect("Failed to add port 1");
+    add_port(iface2, device2, 2).expect("Failed to add port 2");
 
-    println!("Bridge initialized with 2 ports");
+    let bridge_guard = GLOBAL_BRIDGE.write().expect("Failed to get bridge");
+    if let Some(bridge) = bridge_guard.as_ref() {
+        if let Some(inner) = bridge.downcast_ref::<GlobalBridgeInner>() {
+            let mut bridge_lock = inner.bridge.lock().unwrap();
+            bridge_lock.fdb_add(&EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]), 1)
+                .expect("Failed to add static FDB entry 1");
+            println!("Added static FDB entry: 02:00:00:00:00:01 -> Port 1");
 
-    // 添加静态转发表项
-    {
-        let bridge_arc = bridge.get_bridge();
-        let bridge_inner = bridge_arc.lock().unwrap();
-        
-        bridge_inner.fdb_add(&EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]), 1)
-            .expect("Failed to add static FDB entry 1");
-        println!("Added static FDB entry: 02:00:00:00:00:01 -> Port 1");
-
-        bridge_inner.fdb_add(&EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02]), 2)
-            .expect("Failed to add static FDB entry 2");
-        println!("Added static FDB entry: 02:00:00:00:00:02 -> Port 2");
-    }
-
-    // 模拟数据传输
-    let messages = vec![
-        "Hello from Device 1!",
-        "Response from Device 2",
-        "More data from Device 1",
-        "Final message from Device 2",
-    ];
-
-    for (i, message) in messages.iter().enumerate() {
-        println!("\nTransmitting message {}: {}", i + 1, message);
-
-        // 确定源和目的MAC地址
-        let (src_mac, dst_mac) = if i % 2 == 0 {
-            (EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]),
-             EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02]))
-        } else {
-            (EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02]),
-             EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]))
-        };
-
-        // 创建以太网帧
-        let mut buffer = vec![0u8; 64 + message.len()]; // 假设最大帧大小为64字节 + 消息长度
-        let mut frame = EthernetFrame::new_unchecked(&mut buffer);
-        frame.set_src_addr(src_mac);
-        frame.set_dst_addr(dst_mac);
-        frame.set_ethertype(EthernetProtocol::Ipv4);
-
-        // 构造 IPv4 数据包
-        let mut ip_packet = Ipv4Packet::new_unchecked(frame.payload_mut());
-        ip_packet.set_version(4);
-        ip_packet.set_header_len(20); // 5 * 4 = 20 bytes
-        ip_packet.set_dscp(0);
-        ip_packet.set_ecn(0);
-        ip_packet.set_total_len((20 + 8 + message.len()) as u16); // IP header + UDP header + message
-        ip_packet.set_ident(0);
-        ip_packet.set_src_addr(Ipv4Address::new(192, 168, 0, 1));
-        ip_packet.set_dst_addr(Ipv4Address::new(192, 168, 0, 2));
-        let checksum = ip_packet.checksum();
-        ip_packet.set_checksum(checksum);
-
-        // 构造 UDP 数据包
-        let mut udp_packet = UdpPacket::new_unchecked(ip_packet.payload_mut());
-        udp_packet.set_src_port(12345);
-        udp_packet.set_dst_port(54321);
-        udp_packet.set_len((8 + message.len()) as u16);
-        udp_packet.set_checksum(0); // UDP校验和是可选的，这里设置为0
-
-        // 添加消息数据
-        let udp_payload = udp_packet.payload_mut();
-        udp_payload[..message.len()].copy_from_slice(message.as_bytes());
-
-        // 处理帧
-        let src_port = if i % 2 == 0 { 0 } else { 1 };
-        match bridge.process_frame(&frame, src_port) {
-            Ok(_) => println!("Frame processed successfully"),
-            Err(e) => println!("Error processing frame: {}", e),
+            bridge_lock.fdb_add(&EthernetAddress::from_bytes(&[0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]), 2)
+                .expect("Failed to add static FDB entry 2");
+            println!("Added static FDB entry: 02:00:00:00:00:02 -> Port 2");
         }
+    }
+}
 
-        // 模拟接收和打印数据
-        let dst_port = if i % 2 == 0 { 1 } else { 0 };
-        println!("Received at Port {}", dst_port + 1);
+fn main() {
+    config();
 
-        let eth_bytes = frame.as_ref();
-        match Ipv4Packet::new_checked(&eth_bytes[EthernetFrame::<&[u8]>::header_len()..]) {
-            Ok(received_ip_packet) => {
-                match UdpPacket::new_checked(received_ip_packet.payload()) {
-                    Ok(received_udp_packet) => {
-                        match std::str::from_utf8(received_udp_packet.payload()) {
-                            Ok(received_message) => {
-                                println!("Received message: {}", received_message);
-                            },
-                            Err(_) => {
-                                println!("Error: Unable to decode message as UTF-8");
-                            }
-                        }
-                    },
-                    Err(_) => {
-                        println!("Error: Invalid UDP packet");
+    let time = Instant::now();
+    let mut device = Loopback::new(Medium::Ethernet);
+    let config1 = Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x01]).into());
+    let ip_addr = IpCidr::new(IpAddress::v4(192, 168, 1, 100), 24);
+    let mut iface = Interface::new(config1, &mut device, time);
+    iface.update_ip_addrs(|addrs| {
+        addrs.push(ip_addr).unwrap();
+    });
+
+    let rx_buffer = buffer(64);
+    let tx_buffer = buffer(64);   
+    let udp_socket = Socket::new(rx_buffer, tx_buffer);
+
+    let mut sockets = SocketSet::new(vec![]);
+    let udp_handle = sockets.add(udp_socket);
+
+    let socket = sockets.get_mut::<Socket>(udp_handle);
+    socket.bind(24).expect("Failed to bind UDP socket");
+
+    let iface = Arc::new(Mutex::new(iface));
+    let device = Arc::new(Mutex::new(device));
+    let sockets = Arc::new(Mutex::new(sockets));
+
+    // 配置和监听线程
+    let iface_clone = Arc::clone(&iface);
+    let device_clone = Arc::clone(&device);
+    let sockets_clone = Arc::clone(&sockets);
+    let listen_thread = thread::spawn(move || {
+        loop {
+            let timestamp = Instant::now();
+            let mut iface = iface_clone.lock().unwrap();
+            let mut device = device_clone.lock().unwrap();
+            let mut sockets = sockets_clone.lock().unwrap();
+            
+            let flags = iface.poll(timestamp, &mut *device, &mut *sockets);
+            println!("Flags: {:?}", flags);
+
+            let socket = sockets.get_mut::<Socket>(udp_handle);
+            if socket.can_recv() {
+                match socket.recv() {
+                    Ok((data, endpoint)) => {
+                        println!("Received data: {:?} from {}", data, endpoint);
+                    }
+                    Err(e) => {
+                        println!("Error receiving data: {:?}", e);
                     }
                 }
-            },
-            Err(_) => {
-                println!("Error: Invalid IP packet");
             }
-        }
 
-        // 模拟FDB老化
-        if i % 2 == 1 {
-            bridge.age_fdb();
-            println!("FDB aged");
+            drop(iface);
+            drop(device);
+            drop(sockets);
+            thread::sleep(std::time::Duration::from_millis(10));
         }
-    }
+    });
 
-    println!("Bridge simulation completed");
+    // 发送数据线程
+    let _iface_clone = Arc::clone(&iface);
+    let sockets_clone = Arc::clone(&sockets);
+    let send_thread = thread::spawn(move || {
+        let mut send_timer = Instant::now();
+        loop {
+            let timestamp = Instant::now();
+            if timestamp - send_timer >= smoltcp::time::Duration::from_secs(1) {
+                send_timer = timestamp;
+                let endpoint = (IpAddress::v4(192, 168, 1, 101), 1234);
+                
+                let mut sockets = sockets_clone.lock().unwrap();
+                let socket = sockets.get_mut::<Socket>(udp_handle);
+                
+                if socket.can_send() {
+                    match socket.send_slice(b"Hello, world!", endpoint) {
+                        Ok(_) => println!("Sent data successfully"),
+                        Err(e) => println!("Error sending data: {:?}", e),
+                    }
+                }
+                drop(sockets);
+            }
+            thread::sleep(std::time::Duration::from_millis(10));
+        }
+    });
+
+    listen_thread.join().unwrap();
+    send_thread.join().unwrap();
 }

@@ -70,8 +70,9 @@ fn main() {
         // 创建一个模拟的以太网帧
         let src_mac = EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]);
         let dst_mac = EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x02]);
-        let mut buffer = vec![0u8; 64]; // 假设最大帧大小为64字节
-        let mut frame = EthernetFrame::new_unchecked(&mut buffer);
+        let mut buffer_vec = vec![0u8; 64]; // 假设最大帧大小为64字节
+        let buffer = buffer_vec.as_mut_slice();
+        let mut frame = EthernetFrame::new_unchecked(buffer);
         frame.set_src_addr(src_mac);
         frame.set_dst_addr(dst_mac);
         frame.set_ethertype(EthernetProtocol::Ipv4);
@@ -101,7 +102,8 @@ fn main() {
         udp_packet.set_dst_port(54321);
 
         // 处理帧
-        match bridge.process_frame(&frame, 0) {
+        let iframe = EthernetFrame::new_unchecked(frame.as_ref());
+        match bridge.process_frame(&iframe, 0) {
             Ok(_) => println!("Frame processed successfully"),
             Err(e) => println!("Error processing frame: {}", e),
         }
