@@ -7,7 +7,7 @@ use super::EthernetAddress;
 const BRIDGEIF_AGE_TIMER_MS: usize = 1000;
 const BR_FDB_TIMEOUT_SEC: Duration = Duration::from_secs(60 * 5); //5 minutes FDB timeout
 pub const MAX_FDB_ENTRIES: usize = 1024;
-pub type BridgeifPortmask = usize;
+pub type BridgeifPortmask = u8;
 pub const BR_FLOOD: BridgeifPortmask = !0;
 
 #[derive(Debug, Clone, Copy)]
@@ -40,14 +40,7 @@ impl BridgeDfdb {
             fdb: Arc::new(Mutex::new(fdb)),
         }
     }
-
-    // pub fn new(max_entries: u16) -> Self {
-    //     BridgeDfdb {
-    //         max_fdb_entries: max_entries,
-    //         fdb: Arc::new(Mutex::new(HashMap::with_capacity(max_entries as usize))),
-    //     }
-    // }
-
+    
     pub fn init(max_fdb_entries: u16) -> Arc<Mutex<Self>> {
         let fdb: HashMap<EthernetAddress, BridgeDfdbEntry> = (0..max_fdb_entries)
             .map(|_| {(EthernetAddress([0; 6]),
@@ -124,7 +117,7 @@ impl BridgeDfdb {
     pub fn get_dst_ports(&self, dst_addr: &EthernetAddress) -> BridgeifPortmask {
         let fdb = self.fdb.lock().unwrap();
 
-        fdb.get(dst_addr).map_or(BR_FLOOD, |entry| {
+        fdb.get(dst_addr).map_or(255, |entry| {
             if entry.used && entry.ts.elapsed() < BR_FDB_TIMEOUT_SEC {
                 1 << entry.port
             } else {

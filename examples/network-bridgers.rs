@@ -32,7 +32,7 @@ pub fn get_port2_mac() -> EthernetAddress {
 
 // Global bridge variable
 lazy_static::lazy_static! {
-    static ref BRIDGE: Mutex<BridgeWrapper<Loopback>> = {
+    static ref BRIDGE: Mutex<BridgeWrapper> = {
         let time = Instant::now();
         let mut device1 = Loopback::new(Medium::Ethernet);
         let mut device2 = Loopback::new(Medium::Ethernet);

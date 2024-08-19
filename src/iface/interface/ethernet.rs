@@ -18,8 +18,6 @@ impl InterfaceInner {
             return None;
         }
 
-        println!("ethertype {}", eth_frame.ethertype());
-
         match eth_frame.ethertype() {
             #[cfg(feature = "proto-ipv4")]
             EthernetProtocol::Arp => self.process_arp(self.now, &eth_frame),

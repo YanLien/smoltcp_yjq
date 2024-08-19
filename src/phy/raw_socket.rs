@@ -1,7 +1,8 @@
-use std::cell::RefCell;
+// use std::cell::RefCell;
 use std::io;
 use std::os::unix::io::{AsRawFd, RawFd};
-use std::rc::Rc;
+// use std::rc::Rc;
+use std::sync::{Arc, Mutex};
 use std::vec::Vec;
 
 use crate::phy::{self, sys, Device, DeviceCapabilities, Medium};
@@ -11,13 +12,13 @@ use crate::time::Instant;
 #[derive(Debug)]
 pub struct RawSocket {
     medium: Medium,
-    lower: Rc<RefCell<sys::RawSocketDesc>>,
+    lower: Arc<Mutex<sys::RawSocketDesc>>,
     mtu: usize,
 }
 
 impl AsRawFd for RawSocket {
     fn as_raw_fd(&self) -> RawFd {
-        self.lower.borrow().as_raw_fd()
+        self.lower.lock().unwrap().as_raw_fd()
     }
 }
 
@@ -52,7 +53,7 @@ impl RawSocket {
 
         Ok(RawSocket {
             medium,
-            lower: Rc::new(RefCell::new(lower)),
+            lower: Arc::new(Mutex::new(lower)),
             mtu,
         })
     }
@@ -75,7 +76,7 @@ impl Device for RawSocket {
     }
 
     fn receive(&mut self, _timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
-        let mut lower = self.lower.borrow_mut();
+        let mut lower = self.lower.lock().unwrap();
         let mut buffer = vec![0; self.mtu];
         match lower.recv(&mut buffer[..]) {
             Ok(size) => {
@@ -114,7 +115,7 @@ impl phy::RxToken for RxToken {
 
 #[doc(hidden)]
 pub struct TxToken {
-    lower: Rc<RefCell<sys::RawSocketDesc>>,
+    lower: Arc<Mutex<sys::RawSocketDesc>>,
 }
 
 impl phy::TxToken for TxToken {
@@ -122,7 +123,7 @@ impl phy::TxToken for TxToken {
     where
         F: FnOnce(&mut [u8]) -> R,
     {
-        let mut lower = self.lower.borrow_mut();
+        let mut lower = self.lower.lock().unwrap();;
         let mut buffer = vec![0; len];
         let result = f(&mut buffer);
         match lower.send(&buffer[..]) {

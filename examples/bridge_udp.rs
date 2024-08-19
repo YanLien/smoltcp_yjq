@@ -6,7 +6,7 @@ use smoltcp::phy::{Loopback, Medium};
 use smoltcp::socket::udp::{PacketMetadata, Socket, PacketBuffer};
 use smoltcp::time::Instant;
 use smoltcp::wire::global_bridge::{add_port, initialize_bridge, GlobalBridgeInner, GLOBAL_BRIDGE};
-use smoltcp::wire::{EthernetAddress, HardwareAddress, IpAddress, IpCidr};
+use smoltcp::wire::{EthernetAddress, HardwareAddress, IpAddress, IpCidr, Ipv4Address, Ipv6Address};
 
 pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
 pub const PORT1_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x01];
@@ -84,12 +84,37 @@ fn main() {
 
     let time = Instant::now();
     let mut device = Loopback::new(Medium::Ethernet);
-    let config1 = Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x01]).into());
-    let ip_addr = IpCidr::new(IpAddress::v4(192, 168, 1, 100), 24);
-    let mut iface = Interface::new(config1, &mut device, time);
-    iface.update_ip_addrs(|addrs| {
-        addrs.push(ip_addr).unwrap();
+    let config = Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x01]).into());
+    let mut iface = Interface::new(config, &mut device, time);
+    
+    iface.update_ip_addrs(|ip_addrs| {
+        ip_addrs
+            .push(IpCidr::new(IpAddress::v4(192, 168, 69, 1), 24))
+            .unwrap();
+        // ip_addrs
+        //     .push(IpCidr::new(IpAddress::v6(0xfdaa, 0, 0, 0, 0, 0, 0, 1), 64))
+        //     .unwrap();
+        // ip_addrs
+        //     .push(IpCidr::new(IpAddress::v6(0xfe80, 0, 0, 0, 0, 0, 0, 1), 64))
+        //     .unwrap();
     });
+    // 为网络接口添加一条默认的 IPv4 路由。
+    // 默认路由：默认路由用于处理那些没有明确匹配路由表中其他条目的流量。
+    // 例如，如果数据包的目标 IP 地址不在本地网络上，网络堆栈会将数据包发送到默认路由指定的网关，这样网关可以将数据包转发到其他网络（通常是互联网）。
+    iface
+        .routes_mut()
+        .add_default_ipv4_route(Ipv4Address::new(192, 168, 69, 100))
+        .unwrap();
+    iface
+        .routes_mut()
+        .add_default_ipv6_route(Ipv6Address::new(0xfe80, 0, 0, 0, 0, 0, 0, 0x100))
+        .unwrap();
+
+    iface.neighbor_cache_mut().fill(
+        IpAddress::v4(192, 168, 69, 100),
+        EthernetAddress([0x02, 0xbc, 0xea, 0x14, 0xc9, 0xbf]).into(),
+        Instant::now()
+    );
 
     let rx_buffer = buffer(64);
     let tx_buffer = buffer(64);   
@@ -147,7 +172,7 @@ fn main() {
             let timestamp = Instant::now();
             if timestamp - send_timer >= smoltcp::time::Duration::from_secs(1) {
                 send_timer = timestamp;
-                let endpoint = (IpAddress::v4(192, 168, 1, 101), 1234);
+                let endpoint = (IpAddress::v4(192, 168, 1, 100), 1234);
                 
                 let mut sockets = sockets_clone.lock().unwrap();
                 let socket = sockets.get_mut::<Socket>(udp_handle);

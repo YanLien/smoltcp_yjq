@@ -11,7 +11,7 @@ pub(crate) enum EthernetPacket<'a> {
     Ip(Packet<'a>),
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub(crate) enum Packet<'p> {
     #[cfg(feature = "proto-ipv4")]
@@ -149,7 +149,7 @@ impl<'p> Packet<'p> {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 #[cfg(feature = "proto-ipv4")]
 pub(crate) struct PacketV4<'p> {
@@ -157,7 +157,7 @@ pub(crate) struct PacketV4<'p> {
     payload: IpPayload<'p>,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 #[cfg(feature = "proto-ipv6")]
 pub(crate) struct PacketV6<'p> {
@@ -171,7 +171,7 @@ pub(crate) struct PacketV6<'p> {
     pub(crate) payload: IpPayload<'p>,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub(crate) enum IpPayload<'p> {
     #[cfg(feature = "proto-ipv4")]

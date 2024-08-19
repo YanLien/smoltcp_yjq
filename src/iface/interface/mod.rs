@@ -26,7 +26,6 @@ mod udp;
 
 #[cfg(feature = "proto-igmp")]
 pub use igmp::MulticastError;
-use libc::process_vm_readv;
 
 use super::packet::*;
 
@@ -55,7 +54,7 @@ use crate::socket::*;
 use crate::time::{Duration, Instant};
 
 use bridge_fdb::BridgeifPortmask;
-use global_bridge::{GlobalBridgeInner, GLOBAL_BRIDGE};
+use global_bridge::GLOBAL_BRIDGE;
 
 static INTERFACE_ID_COUNTER: AtomicUsize = AtomicUsize::new(1);
 
@@ -84,7 +83,7 @@ use check;
 /// a dependency on heap allocation, it instead owns a `BorrowMut<[T]>`, which can be
 /// a `&mut [T]`, or `Vec<T>` if a heap is available.
 pub struct Interface {
-    id: usize, // Unique ID for the interface
+    ifid: usize, // Unique ID for the interface
     pub(crate) inner: InterfaceInner,
     fragments: FragmentsBuffer,
     fragmenter: Fragmenter,
@@ -214,7 +213,7 @@ impl Interface {
         }
 
         Interface {
-            id: INTERFACE_ID_COUNTER.fetch_add(1, Ordering::SeqCst),
+            ifid: INTERFACE_ID_COUNTER.fetch_add(1, Ordering::SeqCst),
             fragments: FragmentsBuffer {
                 #[cfg(feature = "proto-sixlowpan")]
                 decompress_buf: [0u8; sixlowpan::MAX_DECOMPRESSED_LEN],
@@ -364,6 +363,14 @@ impl Interface {
         &mut self.inner.routes
     }
 
+    pub fn neighbor_cache(&self) -> &NeighborCache {
+        &self.inner.neighbor_cache
+    }
+
+    pub fn neighbor_cache_mut(&mut self) -> &mut NeighborCache {
+        &mut self.inner.neighbor_cache
+    }
+
     /// Enable or disable the AnyIP capability.
     ///
     /// AnyIP allowins packets to be received
@@ -449,11 +456,11 @@ impl Interface {
             let mut did_something = false;
             did_something |= self.socket_ingress(device, sockets);
 
-            println!("poll: did_something_socket_ingress: {}", did_something);
+            // println!("poll: did_something_socket_ingress: {}", did_something);
             
             did_something |= self.socket_egress(device, sockets);
 
-            println!("poll: did_something_socket_egress: {}", did_something);
+            // println!("poll: did_something_socket_egress: {}", did_something);
             
             #[cfg(feature = "proto-igmp")]
             {
@@ -525,166 +532,212 @@ impl Interface {
         D: Device + ?Sized,
     {
         let mut processed_any = false;
-    
-        while let Some((rx_token, tx_token)) = device.receive(self.inner.now) {
-            rx_token.preprocess(sockets);
-            let rx_meta = rx_token.meta();
-            rx_token.consume(|frame| {
-                if frame.is_empty() {
-                    return;
-                }
-    
-                match self.inner.caps.medium {
-                    #[cfg(feature = "medium-ethernet")]
-                    Medium::Ethernet => {
-                        let ethernet_frame = EthernetFrame::new_checked(frame);
-                        if let Ok(eth_frame) = ethernet_frame {
-                            let src_mac = eth_frame.src_addr();
-                            let dst_mac = eth_frame.dst_addr();
 
-                            println!("socket_ingress: src_mac: {:?}", src_mac);
-                            println!("socket_ingress: dst_mac: {:?}", dst_mac);
+        let Some((rx_token, tx_token)) = device.receive(self.inner.now) else {
+            return processed_any;
+        };
 
-                            // Check if we need to bridge this frame
-                            let bridge_ports = self.check_bridge_ports(&src_mac, &dst_mac);
+        let rx_meta = rx_token.meta();
+        rx_token.consume(|frame| {
+            if frame.is_empty() {
+                return;
+            }
 
-                            println!("{:?}", bridge_ports);
-    
-                            // Create a new borrow of frame for all subsequent operations
-                            let frame_slice = eth_frame.as_ref();
-    
-                            if let Some(packet) = self.inner.process_ethernet(
-                                sockets,
-                                rx_meta,
-                                frame_slice,
-                                &mut self.fragments,
-                            ) {
-                                if let Err(err) = self.inner.dispatch(tx_token, packet, &mut self.fragmenter) {
-                                    net_debug!("Failed to send response: {:?}", err);
+            println!("socket_ingress: frame: {:02x?}", frame);
+
+            match self.inner.caps.medium {
+                #[cfg(feature = "medium-ethernet")]
+                Medium::Ethernet => {
+                    let ethernet_frame = EthernetFrame::new_checked(frame);
+                    if let Ok(eth_frame) = ethernet_frame {
+                        let src_mac = eth_frame.src_addr();
+                        let dst_mac = eth_frame.dst_addr();
+                
+                        net_debug!("socket_ingress:: src_mac: {:02x?}", src_mac);
+                        net_debug!("socket_ingress:: dst_mac: {:02x?}", dst_mac);
+
+                        // 检查是否需要桥接此数据帧
+                        let bridge_ports = self.check_bridge_ports(&src_mac, &dst_mac);
+
+                        net_debug!("socket_ingress: bridge_ports: {:?}", bridge_ports);
+                
+                        // 如果数据帧需要通过网桥转发
+                        if let Some(ports) = bridge_ports {
+                            // 执行网桥转发
+                            let ethernet_frame = match EthernetFrame::new_checked(eth_frame.as_ref()) {
+                                Ok(frame) => frame,
+                                Err(e) => {
+                                    net_debug!("Failed to parse Ethernet frame: {:?}", e);
+                                    return;
                                 }
                             };
-    
-                            // Perform bridge forwarding here
-                            if let Some(ports) = bridge_ports {
-                                self.forward_to_bridge(frame_slice, ports);
+                        
+                            let src_addr = ethernet_frame.src_addr();
+                            let dst_addr = ethernet_frame.dst_addr();
+                            
+                            let bridge_guard = GLOBAL_BRIDGE.lock().unwrap();
+                            let bridge_lock = bridge_guard.as_ref().unwrap();
+                        
+                            let bindings = bridge_lock.get_bridge();
+                            let mut bridge = bindings.lock().unwrap();
+                    
+                            let num_ports = bridge.num_ports;
+                            drop(bridge_guard);
+                    
+                            for port in 0..num_ports {  // Assuming max 8 ports, adjust as needed
+                                if ports & (1 << port) != 0 {
+                                    net_debug!("src_addr {} dst_addr {}, received from port {}", src_addr, dst_addr, port);
+                        
+                                    if let Err(e) = bridge.fdb_dynamic.update_entry(src_addr, port) {
+                                        net_debug!("Failed to update dynamic FDB for source address: {:?}", e);
+                                    }
+                        
+                                    println!("forward_to_bridge: forwarding to port {}", port);
+                                    if let Some(port) = bridge.ports.get_mut(&port) {
+                                        let port_device = port.get_port_device();
+                                        let mut binding = match port_device.try_write() {
+                                            Ok(lock) => lock,
+                                            Err(_) => {
+                                                net_debug!("Port device is currently locked by another thread");
+                                                continue; // 或者返回错误
+                                            }
+                                        };
+
+                                        let Some((_, tx_tokenx)) = binding.receive(self.inner.now) else {
+                                            continue;
+                                        };
+                
+                                        if let Some(packet) = port.port_iface.inner.process_ethernet(
+                                            sockets,
+                                            rx_meta,
+                                            eth_frame.as_ref(),
+                                            &mut self.fragments,
+                                        ) {
+                                            if let Err(err) = port.port_iface.inner.dispatch(tx_tokenx, packet, &mut self.fragmenter) {
+                                                net_debug!("Failed to send response: {:?}", err);
+                                            }
+                                        };
+                                    } else {
+                                        net_debug!("Port {} not found", port);
+                                    }
+                                }
                             }
                         }
-                    }
-                    #[cfg(feature = "medium-ip")]
-                    Medium::Ip => {
-                        if let Some(packet) =
-                            self.inner
-                                .process_ip(sockets, rx_meta, frame, &mut self.fragments)
-                        {
-                            if let Err(err) = self.inner.dispatch_ip(
-                                tx_token,
-                                PacketMeta::default(),
-                                packet,
-                                &mut self.fragmenter,
-                            ) {
-                                net_debug!("Failed to send response: {:?}", err);
-                            }
-                        }
-                    }
-                    #[cfg(feature = "medium-ieee802154")]
-                    Medium::Ieee802154 => {
-                        if let Some(packet) = self.inner.process_ieee802154(
+                
+                        // 如果数据帧是针对传入的Device，继续处理。
+                        if let Some(packet) = self.inner.process_ethernet(
                             sockets,
                             rx_meta,
-                            frame,
+                            eth_frame.as_ref(),
                             &mut self.fragments,
                         ) {
-                            if let Err(err) = self.inner.dispatch_ip(
-                                tx_token,
-                                PacketMeta::default(),
-                                packet,
-                                &mut self.fragmenter,
-                            ) {
+                            if let Err(err) = self.inner.dispatch(tx_token, packet, &mut self.fragmenter) {
                                 net_debug!("Failed to send response: {:?}", err);
                             }
+                        };
+                    }
+                }
+                #[cfg(feature = "medium-ip")]
+                Medium::Ip => {
+                    if let Some(packet) =
+                        self.inner
+                            .process_ip(sockets, rx_meta, frame, &mut self.fragments)
+                    {
+                        if let Err(err) = self.inner.dispatch_ip(
+                            tx_token,
+                            PacketMeta::default(),
+                            packet,
+                            &mut self.fragmenter,
+                        ) {
+                            net_debug!("Failed to send response: {:?}", err);
                         }
                     }
-                }   
-                processed_any = true;
-            });
-        }
-    
+                }
+                #[cfg(feature = "medium-ieee802154")]
+                Medium::Ieee802154 => {
+                    if let Some(packet) =
+                        self.inner
+                            .process_ieee802154(sockets, rx_meta, frame, &mut self.fragments)
+                    {
+                        if let Err(err) = self.inner.dispatch_ip(
+                            tx_token,
+                            PacketMeta::default(),
+                            packet,
+                            &mut self.fragmenter,
+                        ) {
+                            net_debug!("Failed to send response: {:?}", err);
+                        }
+                    }
+                }
+            }
+            processed_any = true;
+        });
+
         processed_any
     }
-    
-    fn check_bridge_ports(&self, src_mac: &EthernetAddress, dst_mac: &EthernetAddress) -> Option<BridgeifPortmask> {
 
-        let bridge_result = GLOBAL_BRIDGE.read().unwrap();
-        if let Some(bridge) = bridge_result.as_ref() {
-            if let Some(inner) = bridge.downcast_ref::<GlobalBridgeInner>() {
-                let mut bridge_lock = inner.bridge.lock().unwrap();
-                
-                // todo: 添加边界限制
-                let port_num = if let Some(port) = bridge_lock.get_port(&self) {
-                    port
-                } else {
-                    1 + bridge_lock.num_ports() as u32
-                };
-
-                // Learn the source MAC address
-                if let Err(err) = bridge_lock.fdb_add(src_mac, port_num as usize) {
-                    // Handle the error here
-                    // For example, you can print an error message or return early
-                    eprintln!("Failed to add MAC address to FDB: {:?}", err);
-                }
-    
-                // Find destination ports
-                let dst_ports = bridge_lock.find_dst_ports(dst_mac);
-
-                println!("{}", dst_ports);
-                
-                // If dst_ports is not the incoming port and not 0 (unknown), we need to forward
-                if dst_ports != 0 && dst_ports != port_num as usize {
-                    return Some(dst_ports);
-                }
+    fn check_bridge_ports(&self, _src_mac: &EthernetAddress, dst_mac: &EthernetAddress) -> Option<BridgeifPortmask> {
+        let mut bridge_result = match GLOBAL_BRIDGE.lock() {
+            Ok(bridge) => bridge,
+            Err(_) => {
+                eprintln!("Failed to acquire bridge lock");
+                return None;  // 锁定失败时返回 None
             }
-        }
-        None
-    }
+        };
     
-    fn forward_to_bridge(&self, frame: &[u8], ports: BridgeifPortmask) {
-        let bridge_result = GLOBAL_BRIDGE.read().unwrap();
-        if let Some(bridge) = bridge_result.as_ref() {
-            if let Some(inner) = bridge.downcast_ref::<GlobalBridgeInner>() {
-                let bridge_lock = inner.bridge.lock().unwrap();
-                if let Ok(ethernet_frame) = EthernetFrame::new_checked(frame) {
-                    for port in 0..8 {  // Assuming max 8 ports, adjust as needed
-                        if ports & (1 << port) != 0 {
-                            if let Err(e) = bridge_lock.process_frame(&ethernet_frame, port as u8) {
-                                net_debug!("Failed to process frame on bridge port {}: {:?}", port, e);
-                            }
-                        }
+        if let Some(bridge_lock) = bridge_result.as_mut() {
+            // 获取源端口，如果获取失败则返回错误
+            let port_num = match bridge_lock.get_port(self) {
+                Some(port) => port,
+                None => {
+                    // 处理获取端口失败的情况，比如返回默认的错误端口号或者提前退出
+                    let max_ports = bridge_lock.num_ports();
+                    if max_ports >= 8 {
+                        eprintln!("Port number exceeds maximum limit");
+                        return None;
                     }
-                } else {
-                    net_debug!("Failed to parse Ethernet frame");
+                    max_ports + 1  // 添加边界限制，确保端口号不会超出范围
                 }
+            };
+    
+            // // 学习源 MAC 地址，将其添加到转发表（FDB）
+            // if let Err(err) = bridge_lock.fdb_add(src_mac, port_num as usize) {
+            //     eprintln!("Failed to add MAC address to FDB: {:?}", err);
+            //     return None;  // 失败时提前返回，避免后续处理
+            // }
+    
+            // 查找目标 MAC 地址对应的端口
+            let dst_ports = bridge_lock.find_dst_ports(dst_mac);
+
+            println!("check_bridge_ports: dst_ports {}", dst_ports);
+    
+            // 决定是否需要转发帧
+            if dst_ports & (1 << port_num) == 0 {
+                // 释放锁后进行转发操作
+                drop(bridge_result);
+                return Some(dst_ports);
             }
         }
+    
+        // 如果未找到对应的转发端口，返回 None
+        drop(bridge_result);
+        None
     }
 
     fn socket_egress<D>(&mut self, device: &mut D, sockets: &mut SocketSet<'_>) -> bool
     where
         D: Device + ?Sized,
     {
-        let _caps = device.capabilities();
-    
+        // let _caps = device.capabilities();
         enum EgressError {
             Exhausted,
             Dispatch(DispatchError),
         }
 
         let mut emitted_any = false;
-        let caps = self.inner.caps.clone(); // Clone caps to avoid borrowing issues
+        // add 
         let now = self.inner.now;
         let neighbor_cache = self.inner.neighbor_cache.clone();
-        let src_mac = self.inner.hardware_addr.ethernet_or_panic();
-
-        println!("socket_egress: src_mac {}", src_mac);
 
         for item in sockets.items_mut() {
             if !item
@@ -693,7 +746,7 @@ impl Interface {
             {
                 continue;
             }
-    
+
             let mut neighbor_addr = None;
             let mut respond = |inner: &mut InterfaceInner, meta: PacketMeta, response: Packet| {
                 neighbor_addr = Some(response.ip_repr().dst_addr());
@@ -702,89 +755,106 @@ impl Interface {
                     EgressError::Exhausted
                 })?;
 
+                println!("socket_egress: response {:?}", response);
+
+                // add
                 // Check if we have a global bridge
-                let bridge_result = GLOBAL_BRIDGE.read().unwrap();
-                if let Some(bridge) = bridge_result.as_ref() {
-                    if let Some(inner) = bridge.downcast_ref::<GlobalBridgeInner>() {
-                        let bridge_lock = inner.bridge.lock().unwrap();
-                        
-                        // Get the MAC address for the IP
-                        if let Some(ip_addr) = neighbor_addr {
-                            let mac_addr = neighbor_cache.lookup(&ip_addr, now).clone();
-                            println!("socket_egress: mac_addr {:?}", mac_addr);
-                            println!("socket_egress: neighbor_addr {:?}", neighbor_addr);
-                            match mac_addr {
-                                NeighborAnswer::Found(hw_addr) => {
-                                    // Get the destination ports from the bridge using the HardwareAddress
-                                    let dst_ports = match hw_addr {
-                                        #[cfg(feature = "medium-ethernet")]
-                                        HardwareAddress::Ethernet(eth_addr) => {
-                                            println!("test test test");
-                                            bridge_lock.find_dst_ports(&eth_addr)
-                                        },
-                                        #[cfg(feature = "medium-ieee802154")]
-                                        HardwareAddress::Ieee802154(_) => {
-                                            net_debug!("Ieee802154 hardware address not supported for bridge lookup");
-                                            0 // or handle this case as appropriate
-                                        },
-                                        #[cfg(feature = "medium-ip")]
-                                        HardwareAddress::Ip => {
-                                            net_debug!("IP hardware address not supported for bridge lookup");
-                                            0 // or handle this case as appropriate
-                                        }
-                                    };
-                                    
-                                    // If we have destination ports, use the bridge to forward the packet
-                                    if dst_ports != 0 {
-                                        if let HardwareAddress::Ethernet(dst_mac) = hw_addr {
-                                            // Convert Packet to EthernetFrame
-                                            let mut buffer = vec![0u8; 1514]; // Max Ethernet frame size
-                                            
-                                            match ip_to_ethernet(&response, src_mac, dst_mac, &mut buffer, &caps) {
-                                                Ok(frame) => {
-                                                    for port in 0..8 { // Assuming max 8 ports, adjust as needed
-                                                        if dst_ports & (1 << port) != 0 {
-                                                            if let Err(e) = bridge_lock.process_frame(&frame, port as u8) {
-                                                                net_debug!("Failed to process frame on bridge port {}: {:?}", port, e);
-                                                            }
-                                                        }
-                                                    }
-                                                    emitted_any = true;
-                                                    return Ok(());
-                                                },
-                                                Err(e) => {
-                                                    net_debug!("Failed to convert IP to Ethernet: {:?}", e);
-                                                }
-                                            }
-                                        } else {
-                                            net_debug!("Non-Ethernet hardware address, cannot create Ethernet frame");
-                                        }
+                let bridge_result = GLOBAL_BRIDGE.lock().unwrap();
+
+                if let Some(bridge_lock) = bridge_result.as_ref() {
+                    // Get the MAC address for the IP
+                    if let Some(ip_addr) = neighbor_addr {
+                        let dst_mac = neighbor_cache.lookup(&ip_addr, now);
+                        println!("socket_egress: dst_mac {:02x?}", dst_mac);
+                        println!("socket_egress: neighbor_addr {:?}", neighbor_addr);
+                        match dst_mac {
+                            NeighborAnswer::Found(hw_addr) => {
+                                // Get the destination ports from the bridge using the HardwareAddress
+                                let dst_ports = match hw_addr {
+                                    #[cfg(feature = "medium-ethernet")]
+                                    HardwareAddress::Ethernet(eth_addr) => {
+                                        println!("socket_egress: eth_addr {:02x?}", eth_addr);
+                                        bridge_lock.find_dst_ports(&eth_addr)
+                                    },
+                                    #[cfg(feature = "medium-ieee802154")]
+                                    HardwareAddress::Ieee802154(_) => {
+                                        net_debug!("Ieee802154 hardware address not supported for bridge lookup");
+                                        0 // or handle this case as appropriate
+                                    },
+                                    #[cfg(feature = "medium-ip")]
+                                    HardwareAddress::Ip => {
+                                        net_debug!("IP hardware address not supported for bridge lookup");
+                                        0 // or handle this case as appropriate
                                     }
-                                },
-                                NeighborAnswer::NotFound => {
-                                    // Initiate neighbor discovery if necessary
-                                    // This might involve sending an ARP request for IPv4 or Neighbor Solicitation for IPv6
-                                    // The exact implementation depends on your network stack
-                                    net_debug!("Neighbor not found for IP: {:?}", ip_addr);
-                                },
-                                NeighborAnswer::RateLimited => {
-                                    net_debug!("Neighbor lookup rate limited for IP: {:?}", ip_addr);
-                                },
-                            }
+                                };
+
+                                println!("socket_egress: dst_ports {}", dst_ports);
+
+                                let binding = bridge_lock.get_bridge();
+                                let bridge_lock = binding.lock();
+                                let mut bridge = bridge_lock.unwrap();
+
+                                // If we have destination ports, use the bridge to forward the packet
+                                if dst_ports != 0 {
+                                    if let HardwareAddress::Ethernet(dst_mac) = hw_addr {
+                                        println!("socket_egress: dst_mac {:02x?}", dst_mac);
+                                        // Assuming max 8 ports, adjust as needed
+                                        for port in 0..bridge.num_ports { 
+                                            if dst_ports & (1 << port) != 0 {
+                                                net_debug!("socket_egress: Port {} was successfully found and is now being processed", port);
+                                                if let Some(port) = bridge.ports.get_mut(&port) {
+                                                    let port_device = port.get_port_device();
+                                                    let mut binding = match port_device.try_write() {
+                                                        Ok(lock) => lock,
+                                                        Err(_) => {
+                                                            println!("Port device is currently locked by another thread");
+                                                            continue; // 或者返回错误
+                                                        }
+                                                    };
+
+                                                    // 根据端口号找设备，
+                                                    let tx = binding.transmit(port.port_iface.inner.now).ok_or_else(|| {
+                                                        net_debug!("failed to transmit IP: device exhausted");
+                                                        EgressError::Exhausted
+                                                    })?;
+                                                    // 发送逻辑中 这个Inner需要修改
+                                                    port.port_iface.inner
+                                                        .dispatch_ip(tx, meta, response.clone(), &mut self.fragmenter)
+                                                        .map_err(EgressError::Dispatch)?;
+                                                    continue;
+                                                }
+                                            } else {
+                                                net_debug!("Port {} is not a target device!", port);
+                                            }
+                                        }
+                                    } else {
+                                        net_debug!("Non-Ethernet hardware address, cannot create Ethernet frame");
+                                    }
+                                }
+                            },
+                            NeighborAnswer::NotFound => {
+                                // Initiate neighbor discovery if necessary
+                                // This might involve sending an ARP request for IPv4 or Neighbor Solicitation for IPv6
+                                // The exact implementation depends on your network stack
+                                net_debug!("Neighbor not found for IP: {:?}", ip_addr);
+                            },
+                            NeighborAnswer::RateLimited => {
+                                net_debug!("Neighbor lookup rate limited for IP: {:?}", ip_addr);
+                            },
                         }
                     }
                 }
+                drop(bridge_result);
 
-                // 原始发送逻辑
+                // 发送逻辑
                 inner
                     .dispatch_ip(t, meta, response, &mut self.fragmenter)
                     .map_err(EgressError::Dispatch)?;
-    
+
                 emitted_any = true;
-    
                 Ok(())
             };
-    
+
             let result = match &mut item.socket {
                 #[cfg(feature = "socket-raw")]
                 Socket::Raw(socket) => socket.dispatch(&mut self.inner, |inner, (ip, raw)| {
@@ -846,10 +916,13 @@ impl Interface {
                     )
                 }),
             };
-    
             match result {
                 Err(EgressError::Exhausted) => break, // Device buffer full.
                 Err(EgressError::Dispatch(_)) => {
+                    // `NeighborCache` already takes care of rate limiting the neighbor discovery
+                    // requests from the socket. However, without an additional rate limiting
+                    // mechanism, we would spin on every socket that has yet to discover its
+                    // neighbor.
                     item.meta.neighbor_missing(
                         self.inner.now,
                         neighbor_addr.expect("non-IP response packet"),
@@ -864,46 +937,8 @@ impl Interface {
 
 impl PartialEq for Interface {
     fn eq(&self, other: &Self) -> bool {
-        self.id == other.id
+        self.ifid == other.ifid
     }
-}
-
-fn ip_to_ethernet<'a>(
-    packet: &Packet,
-    src_mac: EthernetAddress,
-    dst_mac: EthernetAddress,
-    buffer: &'a mut [u8],
-    caps: &DeviceCapabilities
-) -> Result<EthernetFrame<&'a[u8]>, &'static str> {
-    let ip_repr = packet.ip_repr();
-    let total_len = EthernetFrame::<&[u8]>::header_len() + ip_repr.buffer_len();
-    
-    if buffer.len() < total_len {
-        return Err("Buffer too small for Ethernet frame");
-    }
-
-    let mut frame = EthernetFrame::new_unchecked(buffer);
-
-    // Set Ethernet header
-    frame.set_dst_addr(dst_mac);
-    frame.set_src_addr(src_mac);
-
-    match ip_repr {
-        #[cfg(feature = "proto-ipv4")]
-        IpRepr::Ipv4(repr) => {
-            frame.set_ethertype(EthernetProtocol::Ipv4);
-            let mut ip_packet = Ipv4Packet::new_unchecked(frame.payload_mut());
-            repr.emit(&mut ip_packet, &caps.checksum);
-        }
-        #[cfg(feature = "proto-ipv6")]
-        IpRepr::Ipv6(repr) => {
-            frame.set_ethertype(EthernetProtocol::Ipv6);
-            let mut ip_packet = Ipv6Packet::new_unchecked(frame.payload_mut());
-            repr.emit(&mut ip_packet);
-        }
-    }
-
-    Ok(EthernetFrame::new_unchecked(&*frame.into_inner()))
 }
 
 impl InterfaceInner {
