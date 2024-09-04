@@ -25,7 +25,7 @@ fn main() -> io::Result<()> {
 
     info!("Created {} interface", "tap1");
 
-    let mut device_guard = tap1.write().unwrap();
+    let mut device_guard = tap1.lock().unwrap();
     let mut iface = Interface::new(config, &mut *device_guard, Instant::now());
 
     iface.update_ip_addrs(|ip_addrs| {
@@ -47,7 +47,7 @@ fn main() -> io::Result<()> {
     loop {
         let timestamp = Instant::now();
 
-        let mut device_guard = tap1.write().unwrap();
+        let mut device_guard = tap1.lock().unwrap();
         iface.poll(timestamp, &mut *device_guard, &mut sockets);
         drop(device_guard);
 

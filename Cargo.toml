@@ -273,21 +273,21 @@ rpl-parents-buffer-count-32 = []
 # name = "global_bridge"
 # required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", ]
 
-[[example]]
-name = "network-bridge"
-required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
+# [[example]]
+# name = "network-bridge"
+# required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
 
 # [[example]]
 # name = "network-bridgers"
 # required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
 
-[[example]]
-name = "bridge-receiver"
-required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
+# [[example]]
+# name = "bridge-receiver"
+# required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
 
-[[example]]
-name = "bridge-sender"
-required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
+# [[example]]
+# name = "bridge-sender"
+# required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
 
 # [[example]]
 # name = "bridge"

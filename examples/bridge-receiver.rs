@@ -31,7 +31,7 @@ fn main() -> io::Result<()> {
 
     config.random_seed = rand::random();
 
-    let mut device_guard = tap2.write().unwrap();
+    let mut device_guard = tap2.lock().unwrap();
     let mut iface = Interface::new(config, &mut *device_guard, Instant::now());
     iface.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::v4(tap2_ip.0[0], tap2_ip.0[1], tap2_ip.0[2], tap2_ip.0[3]), 24)).unwrap();
@@ -52,7 +52,7 @@ fn main() -> io::Result<()> {
     loop {
         let timestamp = Instant::now();
 
-        let mut device_guard = tap2.write().unwrap();
+        let mut device_guard = tap2.lock().unwrap();
         iface.poll(timestamp, &mut *device_guard, &mut sockets);
         drop(device_guard);
 

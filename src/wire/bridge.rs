@@ -1,6 +1,5 @@
-use core::marker::PhantomData;
-use std::{collections::HashMap, sync::{Arc, Mutex, RwLock, Weak}};
-use crate::{iface::Interface, phy::{Device, DeviceCapabilities, RxToken, TunTapInterface, TxToken}, time::Instant};
+use std::{collections::HashMap, sync::{Arc, Mutex, Weak}};
+use crate::{iface::Interface, phy::DeviceCapabilities, time::Instant};
 use super::{bridge_device::BridgeDevice, bridge_fdb::{BridgeDfdb, BridgeifPortmask, BR_FLOOD, MAX_FDB_ENTRIES}, EthernetAddress, EthernetFrame};
 
 const MAX_FRAME_SIZE: usize = 1522; // 略大于标准以太网帧的最大大小
@@ -9,70 +8,65 @@ const MAX_FRAME_SIZE: usize = 1522; // 略大于标准以太网帧的最大大�
 pub struct BridgePort {
     pub bridge: Weak<Mutex<Bridge>>,                    // 指向所属网桥的指针
     pub port_iface: Interface,                      // 端口对应的 netif
-    // pub port_device: Arc<RwLock<BridgeDevice>>,     // 端口对应的设备
-    pub port_device: Arc<RwLock<TunTapInterface>>,
+    pub port_device: Arc<Mutex<BridgeDevice>>,     // 端口对应的设备
+    // pub port_device: Arc<RwLock<TunTapInterface>>,
     // pub port_id: usize,
     pub port_num: u8,                                   // 端口号
 }
 
-pub struct Port<D: Device> {
-    port_id: usize,
-    _marker: PhantomData<D>,
-}
-
 impl BridgePort {
-    pub fn send(&mut self, frame: &EthernetFrame<&mut [u8]>) -> Result<(), ()> {
-        let time = Instant::now();
+    // pub fn send(&mut self, frame: &EthernetFrame<&mut [u8]>) -> Result<(), ()> {
+    //     let time = Instant::now();
 
-        if let Some(tx_token) = self.port_device.write().unwrap()
-            .transmit(time) {
-            tx_token.consume(frame.as_ref().len(), |buffer: &mut [u8]| {
-                buffer[..frame.as_ref().len()].copy_from_slice(frame.as_ref());
-            });
-            Ok(())
-        } else {
-            Err(())
-        }
-    }
+    //     if let Some(mut tx_token) = self.port_device.lock().unwrap()
+    //         .transmit(time) {
+    //         tx_token.consume_with(frame.as_ref().len(), &mut |buffer: &mut [u8]| {
+    //             buffer[..frame.as_ref().len()].copy_from_slice(frame.as_ref());
+    //         });
+    //         Ok(())
+    //     } else {
+    //         Err(())
+    //     }
+    // }
 
-    pub fn recv(&mut self) -> Option<[u8; MAX_FRAME_SIZE]> {
-        let time = Instant::now();
-        if let Some((rx_token, _)) = self.port_device.write().unwrap()
-            .receive(time) {
-            let mut frame_buffer = [0u8; MAX_FRAME_SIZE];
-            let mut frame_len = 0;
+    // pub fn recv(&mut self) -> Option<[u8; MAX_FRAME_SIZE]> {
+    //     let time = Instant::now();
+    //     if let Some((mut rx_token, _)) = self.port_device.lock().unwrap()
+    //         .receive(time) {
+    //         let mut frame_buffer = [0u8; MAX_FRAME_SIZE];
+    //         let mut frame_len = 0;
             
-            rx_token.consume(&mut |buffer: &mut [u8]| {
-                if buffer.len() > MAX_FRAME_SIZE {
-                    println!("Received frame too large, truncating");
-                    frame_len = MAX_FRAME_SIZE;
-                } else {
-                    frame_len = buffer.len();
-                }
-                frame_buffer[..frame_len].copy_from_slice(&buffer[..frame_len]);
-            });
+    //         rx_token.consume_with(&mut |buffer: &mut [u8]| {
+    //             if buffer.len() > MAX_FRAME_SIZE {
+    //                 println!("Received frame too large, truncating");
+    //                 frame_len = MAX_FRAME_SIZE;
+    //             } else {
+    //                 frame_len = buffer.len();
+    //             }
+    //             frame_buffer[..frame_len].copy_from_slice(&buffer[..frame_len]);
+    //         });
 
-            if frame_len > 0 {
-                match EthernetFrame::new_checked(&frame_buffer[..frame_len]) {
-                    Ok(_) => {
-                        println!("Received valid frame on port {}", self.port_num);
-                        Some(frame_buffer)
-                    }
-                    Err(_) => {
-                        println!("Received invalid frame on port {}", self.port_num);
-                        None
-                    }
-                }
-            } else {
-                None
-            }
-        } else {
-            None
-        }
-    }
+    //         if frame_len > 0 {
+    //             match EthernetFrame::new_checked(&frame_buffer[..frame_len]) {
+    //                 Ok(_) => {
+    //                     println!("Received valid frame on port {}", self.port_num);
+    //                     Some(frame_buffer)
+    //                 }
+    //                 Err(_) => {
+    //                     println!("Received invalid frame on port {}", self.port_num);
+    //                     None
+    //                 }
+    //             }
+    //         } else {
+    //             None
+    //         }
+    //     } else {
+    //         None
+    //     }
+    // }
 
     pub fn capabilities(&self) -> DeviceCapabilities {
-        self.port_device.read().unwrap()
+        self.port_device.lock().unwrap()
             .capabilities()
     }
 
@@ -80,7 +74,7 @@ impl BridgePort {
         Some(self.port_num)
     }
 
-    pub fn get_port_device(&self) -> Arc<RwLock<TunTapInterface>> {
+    pub fn get_port_device(&self) -> Arc<Mutex<BridgeDevice>> {
         self.port_device.clone()
     }
 }
@@ -245,7 +239,7 @@ impl BridgeWrapper {
         bridge.num_ports
     }
 
-    pub fn add_port(&self, port_iface: Interface, port_device: Arc<RwLock<TunTapInterface>>, port_num: u8) -> Result<(), &'static str> {
+    pub fn add_port(&self, port_iface: Interface, port_device: Arc<Mutex<BridgeDevice>>, port_num: u8) -> Result<(), &'static str> {
         let mut bridge = self.0.lock().unwrap();
         if bridge.num_ports >= bridge.max_ports {
             return Err("Maximum number of ports reached");
@@ -296,10 +290,10 @@ impl BridgeWrapper {
     }
 
     fn forward_frame(&self, frame: &EthernetFrame<&[u8]>, port: &mut BridgePort) -> Result<(), &'static str> {
-        let mut binding = port.port_device.write().unwrap();
-        let tx_token = binding.transmit(Instant::now()).ok_or("Failed to acquire transmit token")?;
+        let mut binding = port.port_device.lock().unwrap();
+        let mut tx_token = binding.transmit(Instant::now()).ok_or("Failed to acquire transmit token")?;
 
-        tx_token.consume(frame.as_ref().len(), |buffer: &mut [u8]| {
+        tx_token.consume_with(frame.as_ref().len(), &mut |buffer: &mut [u8]| {
             buffer.copy_from_slice(frame.as_ref());
             println!("buffer {:?}", buffer);
         });
@@ -316,9 +310,9 @@ impl BridgeWrapper {
         let mut bridge = self.0.lock().unwrap();
         for (port_num, port) in bridge.ports.iter_mut() {
             let time = Instant::now();
-            if let Some((rx_token, _)) = port.port_device.write().unwrap().receive(time) {
+            if let Some((mut rx_token, _)) = port.port_device.lock().unwrap().receive(time) {
                 let mut frame_data = None;
-                rx_token.consume(&mut |buffer: &mut [u8]| {
+                rx_token.consume_with(&mut |buffer: &mut [u8]| {
                     let frame_buffer = buffer.to_vec();
                     match EthernetFrame::new_checked(&frame_buffer) {
                         Ok(_) => {

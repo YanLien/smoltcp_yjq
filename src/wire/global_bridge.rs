@@ -6,6 +6,7 @@ use crate::iface::Interface;
 
 use super::bridge::BridgeWrapper;
 
+use super::bridge_device::BridgeDevice;
 use super::bridge_fdb::BridgeifPortmask;
 
 lazy_static! {
@@ -30,12 +31,12 @@ pub fn initialize_bridge(
 
 pub fn add_port(
     port_iface: Interface,
-    port_device: Arc<RwLock<TunTapInterface>>,
+    port_device: Arc<Mutex<BridgeDevice>>,
     port_num: u8
 ) -> Result<(), &'static str> {
-    let global_bridge = GLOBAL_BRIDGE.lock().unwrap();
-    if let Some(inner) = global_bridge.as_ref() {
-        inner.add_port(port_iface, port_device, port_num)
+    let mut bridge_guard = GLOBAL_BRIDGE.lock().unwrap();
+    if let Some(bridge) = bridge_guard.as_mut() {
+        bridge.add_port(port_iface, port_device, port_num)
     } else {
         Err("Bridge is not initialized")
     }

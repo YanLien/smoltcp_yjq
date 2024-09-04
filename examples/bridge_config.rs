@@ -45,10 +45,6 @@ pub fn get_port5_mac() -> EthernetAddress {
 lazy_static! {
     pub static ref NETWORK_MANAGER: Mutex<NetworkManager> = {
         let network_manager = NetworkManager::new();
-        // // 获取或创建设备
-        // network_manager.get_or_create_device("tap0", Medium::Ethernet).unwrap();
-        // network_manager.get_or_create_device("tap1", Medium::Ethernet).unwrap();
-        // network_manager.get_or_create_device("tap2", Medium::Ethernet).unwrap();
         Mutex::new(network_manager)
     };
 }
@@ -70,9 +66,9 @@ pub fn init_bridge() {
     let config3 = Config::new(HardwareAddress::Ethernet(get_port3_mac()));
 
     // 创建接口
-    let iface1 = Interface::new(config1, &mut *device1.write().unwrap(), time);
-    let iface2 = Interface::new(config2, &mut *device2.write().unwrap(), time);
-    let iface3 = Interface::new(config3, &mut *device3.write().unwrap(), time);
+    let iface1 = Interface::new(config1, &mut *device1.lock().unwrap(), time);
+    let iface2 = Interface::new(config2, &mut *device2.lock().unwrap(), time);
+    let iface3 = Interface::new(config3, &mut *device3.lock().unwrap(), time);
 
     let config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 

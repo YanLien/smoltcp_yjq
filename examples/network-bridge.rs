@@ -10,6 +10,7 @@ use bridge_config::get_port3_mac;
 use bridge_config::MAX_PORTS;
 use log::{debug, error, info};
 use smoltcp::phy::Loopback;
+use smoltcp::phy::TunTapInterface;
 use smoltcp::wire::bridge_device::NetworkManager;
 use smoltcp::wire::global_bridge::add_port;
 use smoltcp::wire::global_bridge::initialize_bridge;
@@ -30,19 +31,24 @@ fn main() -> io::Result<()> {
     println!("init bridge");
     let time = smoltcp::time::Instant::now();
     let mut network_manager = NetworkManager::new();
+
+    let mut tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
+    let mut tap1 = TunTapInterface::new("tap1", Medium::Ethernet).unwrap();
+    let mut tap2 = TunTapInterface::new("tap2", Medium::Ethernet).unwrap();
+    
     // 获取或创建设备
-    let device1 = network_manager.get_or_create_device("tap0", Medium::Ethernet).unwrap();
-    let device2 = network_manager.get_or_create_device("tap1", Medium::Ethernet).unwrap();
-    let device3 = network_manager.get_or_create_device("tap2", Medium::Ethernet).unwrap();
+    let device1 = network_manager.get_or_create_device("tap0", tap0).unwrap();
+    let device2 = network_manager.get_or_create_device("tap1", tap0).unwrap();
+    let device3 = network_manager.get_or_create_device("tap2", tap0).unwrap();
 
     let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
     let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
     let config3 = Config::new(HardwareAddress::Ethernet(get_port3_mac()));
 
     // 创建接口
-    let iface1 = Interface::new(config1, &mut *device1.write().unwrap(), time);
-    let iface2 = Interface::new(config2, &mut *device2.write().unwrap(), time);
-    let iface3 = Interface::new(config3, &mut *device3.write().unwrap(), time);
+    let iface1 = Interface::new(config1, &mut tap0, time);
+    let iface2 = Interface::new(config2, &mut tap1, time);
+    let iface3 = Interface::new(config3, &mut tap2, time);
 
     let config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 
@@ -100,8 +106,8 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
     let config1 = Config::new(HardwareAddress::Ethernet(EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x03])));
     let config2 = Config::new(HardwareAddress::Ethernet(EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x04])));
 
-    let mut iface1 = Interface::new(config1, &mut *tap1.write().unwrap(), Instant::now());
-    let mut iface2 = Interface::new(config2, &mut *tap2.write().unwrap(), Instant::now());
+    let mut iface1 = Interface::new(config1, &mut *tap1.lock().unwrap(), Instant::now());
+    let mut iface2 = Interface::new(config2, &mut *tap2.lock().unwrap(), Instant::now());
 
     iface1.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::from(tap1_ip), 24)).unwrap();
@@ -123,7 +129,7 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
     let udp_handle1 = sockets1.add(udp_socket1);
     let udp_handle2 = sockets2.add(udp_socket2);
 
-    let fd1 = network_manager.get_device_fd("tap1").unwrap();
+    let fd1 = tap0.as_raw_fd();
     let fd2 = network_manager.get_device_fd("tap2").unwrap();
 
     loop {
@@ -131,7 +137,7 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
 
         // 处理发送
         {
-            let mut device1 = tap1.write().unwrap();
+            let mut device1 = tap1.lock().unwrap();
             iface1.poll(timestamp1, &mut *device1, &mut sockets1);
 
             let socket1 = sockets1.get_mut::<udp::Socket>(udp_handle1);
@@ -157,7 +163,7 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
 
         // 处理接收
         {
-            let mut device2 = tap2.write().unwrap();
+            let mut device2 = tap2.lock().unwrap();
             iface2.poll(timestamp2, &mut *device2, &mut sockets2);
 
             let socket2 = sockets2.get_mut::<udp::Socket>(udp_handle2);

@@ -24,6 +24,7 @@ mod tcp;
 #[cfg(any(feature = "socket-udp", feature = "socket-dns"))]
 mod udp;
 
+use bridge_device::TxTokenWrapper;
 #[cfg(feature = "proto-igmp")]
 pub use igmp::MulticastError;
 
@@ -31,6 +32,7 @@ use super::packet::*;
 
 use core::result::Result;
 use core::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
 use heapless::{LinearMap, Vec};
 
 #[cfg(feature = "_proto-fragmentation")]
@@ -595,7 +597,7 @@ impl Interface {
                                     println!("forward_to_bridge: forwarding to port {}", port);
                                     if let Some(port) = bridge.ports.get_mut(&port) {
                                         let port_device = port.get_port_device();
-                                        let mut binding = match port_device.try_write() {
+                                        let mut binding = match port_device.try_lock() {
                                             Ok(lock) => lock,
                                             Err(_) => {
                                                 net_debug!("Port device is currently locked by another thread");
@@ -603,7 +605,16 @@ impl Interface {
                                             }
                                         };
 
-                                        let Some((_, tx_tokenx)) = binding.receive(self.inner.now) else {
+                                            // 获取内部设备的可变引用
+                                            let inner_device = match Arc::get_mut(&mut binding.inner) {
+                                                Some(inner) => inner,
+                                                None => {
+                                                    net_debug!("Cannot get mutable reference to Arc");
+                                                    continue; // 或者返回错误
+                                                }
+                                            };
+
+                                        let Some((_, tx_tokenx)) = inner_device.receive(self.inner.now) else {
                                             continue;
                                         };
                 
@@ -613,7 +624,8 @@ impl Interface {
                                             eth_frame.as_ref(),
                                             &mut self.fragments,
                                         ) {
-                                            if let Err(err) = port.port_iface.inner.dispatch(tx_tokenx, packet, &mut self.fragmenter) {
+                                            let tx_token_wrapper = TxTokenWrapper::new(tx_tokenx);
+                                            if let Err(err) = port.port_iface.inner.dispatch(tx_token_wrapper, packet, &mut self.fragmenter) {
                                                 net_debug!("Failed to send response: {:?}", err);
                                             }
                                         };
@@ -804,7 +816,7 @@ impl Interface {
                                                 net_debug!("socket_egress: Port {} was successfully found and is now being processed", port);
                                                 if let Some(port) = bridge.ports.get_mut(&port) {
                                                     let port_device = port.get_port_device();
-                                                    let mut binding = match port_device.try_write() {
+                                                    let mut binding = match port_device.try_lock() {
                                                         Ok(lock) => lock,
                                                         Err(_) => {
                                                             println!("Port device is currently locked by another thread");
@@ -818,8 +830,9 @@ impl Interface {
                                                         EgressError::Exhausted
                                                     })?;
                                                     // 发送逻辑中 这个Inner需要修改
+                                                    let tx_token_wrapper = TxTokenWrapper::new(tx);
                                                     port.port_iface.inner
-                                                        .dispatch_ip(tx, meta, response.clone(), &mut self.fragmenter)
+                                                        .dispatch_ip(tx_token_wrapper, meta, response.clone(), &mut self.fragmenter)
                                                         .map_err(EgressError::Dispatch)?;
                                                     continue;
                                                 }
