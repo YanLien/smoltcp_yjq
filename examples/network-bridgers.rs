@@ -2,10 +2,12 @@ use std::sync::Mutex;
 use std::time::Duration;
 use std::thread;
 
+use smoltcp::config;
 use smoltcp::iface::{Config, Interface};
 use smoltcp::phy::{Loopback, Medium};
 use smoltcp::time::Instant;
 use smoltcp::wire::bridge::BridgeWrapper;
+use smoltcp::wire::bridge_device::BridgeDevice;
 use smoltcp::wire::{EthernetAddress, EthernetFrame, EthernetProtocol, HardwareAddress, Ipv4Address, Ipv4Packet, UdpPacket};
 
 pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
@@ -34,8 +36,11 @@ pub fn get_port2_mac() -> EthernetAddress {
 lazy_static::lazy_static! {
     static ref BRIDGE: Mutex<BridgeWrapper> = {
         let time = Instant::now();
-        let mut device1 = Loopback::new(Medium::Ethernet);
-        let mut device2 = Loopback::new(Medium::Ethernet);
+        let device1 = Loopback::new(Medium::Ethernet);
+        let device2 = Loopback::new(Medium::Ethernet);
+        
+        let mut device1 = BridgeDevice::new(device1);
+        let mut device2 = BridgeDevice::new(device2);
 
         let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
         let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
@@ -51,8 +56,8 @@ lazy_static::lazy_static! {
             MAX_PORTS
         );
 
-        bridge.add_port(iface1, device1, 1).expect("Failed to add port 1");
-        bridge.add_port(iface2, device2, 2).expect("Failed to add port 2");
+        bridge.add_port(config1, device1, 1).expect("Failed to add port 1");
+        bridge.add_port(config2, device2, 2).expect("Failed to add port 2");
 
         let bridge_arc = bridge.get_bridge();
         let bridge_inner = bridge_arc.lock().unwrap();

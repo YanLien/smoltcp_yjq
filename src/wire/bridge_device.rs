@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 use std::marker::PhantomData;
-use std::sync::{Arc, Mutex};
-
 
 use crate::phy::{Device, DeviceCapabilities, RxToken, TxToken};
 use crate::time::Instant;
@@ -13,9 +11,20 @@ pub trait ObjectSafeDeviceOps {
 }
 
 pub struct DeviceWrapper {
-    inner: Arc<Box<dyn ObjectSafeDeviceOps>>,
+    pub inner: Box<dyn ObjectSafeDeviceOps>,
 }
 
+impl DeviceWrapper {
+    pub fn new(inner: Box<dyn ObjectSafeDeviceOps>) -> Self {
+        DeviceWrapper { 
+            inner
+        }
+    }
+
+    pub fn into_inner(self) -> Box<dyn ObjectSafeDeviceOps> {
+        self.inner
+    }
+}
 
 impl Device for DeviceWrapper {
     type RxToken<'a> = RxTokenWrapper<'a> where Self: 'a;
@@ -26,39 +35,16 @@ impl Device for DeviceWrapper {
     }
 
     fn receive(&mut self, timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
-        // 克隆 Arc 以获取新的引用
-        // let inner = Arc::clone(&self.inner);
-
-        if let Some(inner_mut) = Arc::get_mut(&mut self.inner) {
-            inner_mut.receive(timestamp).map(|(rx, tx)| {
-                (
-                    RxTokenWrapper { rx },
-                    TxTokenWrapper { tx }
-                )
-            })
-        } else {
-            // 如果无法获取可变引用，我们可以考虑返回 None 或使用其他策略
-            None
-        }
+        self.inner.receive(timestamp).map(|(rx, tx)| {(
+            RxTokenWrapper { rx },
+            TxTokenWrapper { tx }
+        )})
     }
 
     fn transmit(&mut self, timestamp: Instant) -> Option<Self::TxToken<'_>> {
-        // 类似于 receive 方法
-        // let inner = Arc::clone(&self.inner);
-        
-        if let Some(inner_mut) = Arc::get_mut(&mut self.inner) {
-            inner_mut.transmit(timestamp).map(|tx| 
-                TxTokenWrapper { tx }
-            )
-        } else {
-            None
-        }
-    }
-}
-
-impl DeviceWrapper {
-    pub fn new(device: Arc<Box<dyn ObjectSafeDeviceOps>>) -> Self {
-        DeviceWrapper { inner: device }
+        self.inner.transmit(timestamp).map(|tx| 
+            TxTokenWrapper { tx }
+        )
     }
 }
 
@@ -91,13 +77,14 @@ impl<D: Device> Device for ObjectSafeDevice<D> {
     }
 
     fn receive(&mut self, timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
-        // let mut inner = self.inner;
+        // println!("ObjectSafeDevice receive called");
         self.inner.receive(timestamp).map(|(rx, tx)| {
             (ObjectSafeRxToken::new(rx), ObjectSafeTxToken::new(tx))
         })
     }
 
     fn transmit(&mut self, timestamp: Instant) -> Option<Self::TxToken<'_>> {
+        // println!("ObjectSafeDevice transmit called");
         self.inner.transmit(timestamp).map(ObjectSafeTxToken::new)
     }
 }
@@ -108,13 +95,15 @@ impl<D: Device> ObjectSafeDeviceOps for ObjectSafeDevice<D> {
     }
 
     fn receive<'a>(&'a mut self, timestamp: Instant) -> Option<(Box<dyn ObjectSafeRxTokenOps + 'a>, Box<dyn ObjectSafeTxTokenOps + 'a>)> {
-        Device::receive(self, timestamp).map(|(rx, tx)| {
-            (Box::new(rx) as Box<dyn ObjectSafeRxTokenOps + 'a>,
-             Box::new(tx) as Box<dyn ObjectSafeTxTokenOps + 'a>)
-        })
+        // println!("ObjectSafeDeviceOps receive called");
+        Device::receive(self, timestamp).map(|(rx, tx)| {(
+            Box::new(rx) as Box<dyn ObjectSafeRxTokenOps + 'a>,
+            Box::new(tx) as Box<dyn ObjectSafeTxTokenOps + 'a>
+        )})
     }
 
     fn transmit<'a>(&'a mut self, timestamp: Instant) -> Option<Box<dyn ObjectSafeTxTokenOps + 'a>> {
+        // println!("ObjectSafeDeviceOps transmit called");
         Device::transmit(self, timestamp).map(|tx| Box::new(tx) as Box<dyn ObjectSafeTxTokenOps + 'a>)
     }
 }
@@ -151,7 +140,6 @@ impl<'a, R: RxToken + 'a> ObjectSafeRxTokenOps<'a> for ObjectSafeRxToken<'a, R> 
 }
 
 pub struct RxTokenWrapper<'a> {
-    // inner: Arc<Box<dyn ObjectSafeDeviceOps>>,
     rx: Box<dyn ObjectSafeRxTokenOps<'a> + 'a>,
 }
 
@@ -202,10 +190,7 @@ impl<'a, T: TxToken + 'a> ObjectSafeTxTokenOps<'a> for ObjectSafeTxToken<'a, T> 
     }
 }
 
-// pub struct TxTokenWrapper<'a>(Box<dyn ObjectSafeTxTokenOps<'a> + 'a>);
-
 pub struct TxTokenWrapper<'a> {
-    // inner: Arc<Box<dyn ObjectSafeDeviceOps>>,
     tx: Box<dyn ObjectSafeTxTokenOps<'a> + 'a>,
 }
 
@@ -222,6 +207,7 @@ impl<'a> TxToken for TxTokenWrapper<'a> {
     where
         F: FnOnce(&mut [u8]) -> R,
     {
+        // println!("TxTokenWrapper consume called");
         let mut result = None;
         let mut f = Some(f);
         self.tx.consume_with(len, &mut |buffer| {
@@ -234,40 +220,115 @@ impl<'a> TxToken for TxTokenWrapper<'a> {
 }
 
 pub struct BridgeDevice {
-    pub inner: Arc<Box<dyn ObjectSafeDeviceOps>>,
+    pub inner: Box<dyn ObjectSafeDeviceOps>,
 }
 
 impl BridgeDevice {
     pub fn new<D: Device + 'static>(device: D) -> Self {
         BridgeDevice {
-            inner: Arc::new(Box::new(ObjectSafeDevice::new(device)))
+            inner: Box::new(ObjectSafeDevice::new(device)),
         }
     }
 
-    pub fn transmit(&mut self, timestamp: Instant) -> Option<Box<dyn ObjectSafeTxTokenOps + '_>> {
-        Arc::get_mut(&mut self.inner)
-            .expect("Cannot get mutable reference to Arc")
-            .transmit(timestamp)
+    pub fn transmit_with(&mut self, timestamp: Instant) -> Option<Box<dyn ObjectSafeTxTokenOps + '_>> {
+        self.inner.transmit(timestamp)
     }
 
-    pub fn receive(&mut self, timestamp: Instant) -> Option<(Box<dyn ObjectSafeRxTokenOps + '_>, Box<dyn ObjectSafeTxTokenOps + '_>)> {
-        Arc::get_mut(&mut self.inner)
-            .expect("Cannot get mutable reference to Arc")
-            .receive(timestamp)
+    pub fn receive_with(&mut self, timestamp: Instant) -> Option<(Box<dyn ObjectSafeRxTokenOps + '_>, Box<dyn ObjectSafeTxTokenOps + '_>)> {
+        self.inner.receive(timestamp)
     }
 
-    pub fn capabilities(&self) -> DeviceCapabilities {
+    pub fn capabilities_with(&self) -> DeviceCapabilities {
         self.inner.capabilities()
     }
 
-    pub fn get_inner(&self) -> Arc<Box<dyn ObjectSafeDeviceOps>> {
-        Arc::clone(&self.inner)
+    pub fn get_inner_mut(&mut self) -> &mut Box<dyn ObjectSafeDeviceOps> {
+        &mut self.inner
+    }
+
+    pub fn get_inner(&self) -> &Box<dyn ObjectSafeDeviceOps> {
+        &self.inner
+    }
+
+    pub fn into_inner(self) -> Box<dyn ObjectSafeDeviceOps> {
+        self.inner
+    }
+
+    pub fn from_box(device: Box<dyn ObjectSafeDeviceOps>) -> Self {
+        Self { 
+            inner: device 
+        }
+    }
+
+    pub fn from_object_safe(device: Box<dyn ObjectSafeDeviceOps>) -> Self {
+        BridgeDevice { inner: device }
+    }
+
+    pub fn as_mut_bridge_device(device: &mut Box<dyn ObjectSafeDeviceOps>) -> &mut BridgeDevice {
+        // 这是不安全的，因为我们在进行类型转换
+        // 只有当我们确定 Box<dyn ObjectSafeDeviceOps> 确实是 BridgeDevice 时才能这样做
+        unsafe { &mut *(device as *mut Box<dyn ObjectSafeDeviceOps> as *mut BridgeDevice) }
+    }
+}
+
+impl Device for BridgeDevice {
+    type RxToken<'a> = RxTokenWrapper<'a> where Self: 'a;
+    type TxToken<'a> = TxTokenWrapper<'a> where Self: 'a;
+
+    fn capabilities(&self) -> DeviceCapabilities {
+        self.inner.capabilities()
+    }
+
+    fn receive(&mut self, timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
+        self.inner.receive(timestamp).map(|(rx, tx)| {(
+            RxTokenWrapper { rx },
+            TxTokenWrapper { tx }
+        )})
+    }
+
+    fn transmit(&mut self, timestamp: Instant) -> Option<Self::TxToken<'_>> {
+        self.inner.transmit(timestamp).map(|tx| 
+            TxTokenWrapper { tx }
+        )
     }
 }
 
 // Helper function to create a boxed ObjectSafeDeviceOps
 pub fn boxed_object_safe_device<D: Device + 'static>(device: D) -> Box<dyn ObjectSafeDeviceOps> {
     Box::new(ObjectSafeDevice::new(device))
+}
+
+pub struct NetworkManager {
+    devices: HashMap<String, BridgeDevice>,
+}
+
+impl NetworkManager {
+    pub fn new() -> Self {
+        NetworkManager {
+            devices: HashMap::new(),
+        }
+    }
+
+    pub fn add_device<D: Device + 'static>(&mut self, name: String, device: D) {
+        let bridge_device = BridgeDevice::new(device);
+        self.devices.insert(name, bridge_device);
+    }
+
+    pub fn get_device(&self, name: &str) -> Option<&BridgeDevice> {
+        self.devices.get(name)
+    }
+
+    pub fn get_device_mut(&mut self, name: &str) -> Option<&mut BridgeDevice> {
+        self.devices.get_mut(name)
+    }
+
+    pub fn remove_device(&mut self, name: &str) -> Option<BridgeDevice> {
+        self.devices.remove(name)
+    }
+
+    pub fn device_names(&self) -> Vec<&String> {
+        self.devices.keys().collect()
+    }
 }
 
 #[cfg(test)]
@@ -277,7 +338,7 @@ mod tests {
 
     #[test]
     fn test_compatible_object_safe_devices() {
-        println!("Testing compatible object-safe devices");
+        // println!("Testing compatible object-safe devices");
 
         // Create a Loopback device
         let loopback = Loopback::new(Medium::Ethernet);
@@ -335,23 +396,5 @@ mod tests {
         }
 
         println!("Compatible object-safe devices test completed successfully");
-    }
-}
-
-pub struct NetworkManager {
-    devices: HashMap<String, Arc<Mutex<BridgeDevice>>>,
-}
-
-impl NetworkManager {
-    pub fn new() -> Self {
-        NetworkManager {
-            devices: HashMap::new(),
-        }
-    }
-
-    pub fn get_or_create_device<D: Device + 'static>(&mut self, name: &str, device: D) -> Arc<Mutex<BridgeDevice>> {
-        self.devices.entry(name.to_string()).or_insert_with(|| {
-            Arc::new(Mutex::new(BridgeDevice::new(device)))
-        }).clone()
     }
 }

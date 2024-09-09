@@ -1,17 +1,13 @@
 mod utils;
 mod bridge_config;
 
-use std::sync::Arc;
-use std::sync::Mutex;
-use bridge_config::get_bridge_mac;
-use bridge_config::get_port1_mac;
-use bridge_config::get_port2_mac;
-use bridge_config::get_port3_mac;
+use bridge_config::{get_bridge_mac, get_port5_mac};
+use bridge_config::{get_port1_mac, get_port2_mac, get_port3_mac, get_port4_mac};
 use bridge_config::MAX_PORTS;
 use log::{debug, error, info};
 use smoltcp::phy::Loopback;
 use smoltcp::phy::TunTapInterface;
-use smoltcp::wire::bridge_device::NetworkManager;
+use smoltcp::wire::bridge_device::BridgeDevice;
 use smoltcp::wire::global_bridge::add_port;
 use smoltcp::wire::global_bridge::initialize_bridge;
 use smoltcp::wire::global_bridge::GLOBAL_BRIDGE;
@@ -19,6 +15,7 @@ use smoltcp::wire::HardwareAddress;
 use std::io;
 use std::thread;
 use std::time::Duration;
+use std::os::unix::io::AsRawFd;
 use smoltcp::iface::{Config, Interface, SocketSet};
 use smoltcp::phy::{wait as phy_wait, Medium};
 use smoltcp::socket::udp;
@@ -30,26 +27,26 @@ fn main() -> io::Result<()> {
 
     println!("init bridge");
     let time = smoltcp::time::Instant::now();
-    let mut network_manager = NetworkManager::new();
 
-    let mut tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
-    let mut tap1 = TunTapInterface::new("tap1", Medium::Ethernet).unwrap();
-    let mut tap2 = TunTapInterface::new("tap2", Medium::Ethernet).unwrap();
-    
-    // 获取或创建设备
-    let device1 = network_manager.get_or_create_device("tap0", tap0).unwrap();
-    let device2 = network_manager.get_or_create_device("tap1", tap0).unwrap();
-    let device3 = network_manager.get_or_create_device("tap2", tap0).unwrap();
+    let tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
+    let device1 = BridgeDevice::new(tap0);
+    let tap1 = TunTapInterface::new("tap1", Medium::Ethernet).unwrap();
+    let fd1 = tap1.as_raw_fd();
+    let device2 = BridgeDevice::new(tap1);
+    let tap2 = TunTapInterface::new("tap2", Medium::Ethernet).unwrap();
+    let fd2 = tap2.as_raw_fd();
+    let device3 = BridgeDevice::new(tap2);
+    let loop1 = Loopback::new(Medium::Ethernet);
+    let device4 = BridgeDevice::new(loop1);
+    let loop2 = Loopback::new(Medium::Ethernet);
+    let device5 = BridgeDevice::new(loop2);
 
     let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
     let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
     let config3 = Config::new(HardwareAddress::Ethernet(get_port3_mac()));
-
-    // 创建接口
-    let iface1 = Interface::new(config1, &mut tap0, time);
-    let iface2 = Interface::new(config2, &mut tap1, time);
-    let iface3 = Interface::new(config3, &mut tap2, time);
-
+    let config4 = Config::new(HardwareAddress::Ethernet(get_port4_mac()));
+    let config5 = Config::new(HardwareAddress::Ethernet(get_port5_mac()));
+    
     let config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 
     // 初始化网桥
@@ -60,36 +57,42 @@ fn main() -> io::Result<()> {
     ).unwrap();
 
     // 添加端口到网桥
-    add_port(iface1, Arc::clone(&device1), 0).expect("Failed to add port 1");
-    add_port(iface2, Arc::clone(&device2), 1).expect("Failed to add port 2");
-    add_port(iface3, Arc::clone(&device3), 2).expect("Failed to add port 3");
+    add_port(config1, device1, 0).expect("Failed to add port 0");
+    add_port(config2, device2, 1).expect("Failed to add port 1");
+    add_port(config3, device3, 2).expect("Failed to add port 2");
+    add_port(config4, device4, 3).expect("Failed to add port 3");
+    add_port(config5, device5, 4).expect("Failed to add port 4");
 
     let mut bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
     if let Some(bridge_lock) = bridge_guard.as_mut() {
         bridge_lock.fdb_add(&get_port1_mac(), 0)
             .expect("Failed to add static FDB entry 0");
-        println!("Added static FDB entry: 02:00:00:00:00:02 -> Port 1");
+        println!("Added static FDB entry: 02:00:00:00:00:02 -> Port 0");
 
         bridge_lock.fdb_add(&get_port2_mac(), 1)
             .expect("Failed to add static FDB entry 1");
-        println!("Added static FDB entry: 02:00:00:00:00:03 -> Port 2");
+        println!("Added static FDB entry: 02:00:00:00:00:03 -> Port 1");
         
         bridge_lock.fdb_add(&get_port3_mac(), 2)
             .expect("Failed to add static FDB entry 2");
-        println!("Added static FDB entry: 02:00:00:00:00:04 -> Port 3");
+        println!("Added static FDB entry: 02:00:00:00:00:04 -> Port 2");
+
+        bridge_lock.fdb_add(&get_port4_mac(), 3)
+            .expect("Failed to add static FDB entry 2");
+        println!("Added static FDB entry: 02:00:00:00:00:04 -> Port 2");
+
+        bridge_lock.fdb_add(&get_port5_mac(), 4)
+            .expect("Failed to add static FDB entry 2");
+        println!("Added static FDB entry: 02:00:00:00:00:04 -> Port 2");
     }
 
     drop(bridge_guard);
-
-    let network_manager = Arc::new(Mutex::new(network_manager));
-    // let network_clone1 = Arc::clone(&network_manager);
-    // let network_clone2 = Arc::clone(&network_manager);
 
     let tap1_ip = Ipv4Address::new(192, 168, 69, 8);
     let tap2_ip = Ipv4Address::new(192, 168, 69, 9);
 
     let handle = thread::spawn(move || {
-        alternating_thread(Arc::clone(&network_manager), tap1_ip, tap2_ip)
+        alternating_thread(tap1_ip, tap2_ip, fd1, fd2);
     });
 
     handle.join().unwrap();
@@ -97,21 +100,23 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4Address, tap2_ip: Ipv4Address) {
-    let mut network_manager = network_manager.lock().unwrap();
+fn alternating_thread(tap1_ip: Ipv4Address, tap2_ip: Ipv4Address, fd1: i32, fd2: i32) {
 
-    let tap1 = network_manager.get_or_create_device("tap1", Medium::Ethernet).unwrap();
-    let tap2 = network_manager.get_or_create_device("tap2", Medium::Ethernet).unwrap();
+    // Get interface
+    let bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let bridge = bridge_guard.as_ref().expect("Failed to get bridge");
+    
+    let mut tap1 = bridge.get_bridgeport(1).unwrap();
+    let mut tap2 = bridge.get_bridgeport(2).unwrap();
 
-    let config1 = Config::new(HardwareAddress::Ethernet(EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x03])));
-    let config2 = Config::new(HardwareAddress::Ethernet(EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x04])));
+    drop(bridge_guard);
 
-    let mut iface1 = Interface::new(config1, &mut *tap1.lock().unwrap(), Instant::now());
-    let mut iface2 = Interface::new(config2, &mut *tap2.lock().unwrap(), Instant::now());
-
+    let mut iface1 = tap1.create_interface();
     iface1.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::from(tap1_ip), 24)).unwrap();
     });
+
+    let mut iface2 = tap2.create_interface();
     iface2.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::from(tap2_ip), 24)).unwrap();
     });
@@ -129,16 +134,14 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
     let udp_handle1 = sockets1.add(udp_socket1);
     let udp_handle2 = sockets2.add(udp_socket2);
 
-    let fd1 = tap0.as_raw_fd();
-    let fd2 = network_manager.get_device_fd("tap2").unwrap();
-
     loop {
         let timestamp1 = Instant::now();
-
         // 处理发送
-        {
-            let mut device1 = tap1.lock().unwrap();
-            iface1.poll(timestamp1, &mut *device1, &mut sockets1);
+        {    
+            let mut device1 = tap1.port_device.lock().unwrap();
+            let bridge_device1 = BridgeDevice::as_mut_bridge_device(&mut device1.inner);
+            
+            iface1.poll(timestamp1, bridge_device1, &mut sockets1);
 
             let socket1 = sockets1.get_mut::<udp::Socket>(udp_handle1);
             if !socket1.is_open() {
@@ -160,11 +163,12 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
         thread::sleep(Duration::from_millis(100));
 
         let timestamp2 = Instant::now();
-
         // 处理接收
         {
-            let mut device2 = tap2.lock().unwrap();
-            iface2.poll(timestamp2, &mut *device2, &mut sockets2);
+            let mut device2 = tap2.port_device.lock().unwrap();
+            let bridge_device2 = BridgeDevice::as_mut_bridge_device(&mut device2.inner);
+            
+            iface2.poll(timestamp2, bridge_device2, &mut sockets2);
 
             let socket2 = sockets2.get_mut::<udp::Socket>(udp_handle2);
             if !socket2.is_open() {
@@ -191,8 +195,6 @@ fn alternating_thread(network_manager: Arc<Mutex<NetworkManager>>, tap1_ip: Ipv4
                 error!("Receiver wait error: {}", e);
             }
         }
-
-        println!("tttt8");
 
         thread::sleep(Duration::from_millis(100));
     }

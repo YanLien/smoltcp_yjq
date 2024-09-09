@@ -32,7 +32,6 @@ use super::packet::*;
 
 use core::result::Result;
 use core::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::Arc;
 use heapless::{LinearMap, Vec};
 
 #[cfg(feature = "_proto-fragmentation")]
@@ -130,6 +129,7 @@ pub struct InterfaceInner {
 
 /// Configuration structure used for creating a network interface.
 #[non_exhaustive]
+#[derive(Clone, Copy)]
 pub struct Config {
     /// Random seed.
     ///
@@ -534,8 +534,9 @@ impl Interface {
         D: Device + ?Sized,
     {
         let mut processed_any = false;
-
+        println!("socket_ingress: rx_token, test");
         let Some((rx_token, tx_token)) = device.receive(self.inner.now) else {
+            println!("socket_ingress: no rx_token, return false");
             return processed_any;
         };
 
@@ -593,9 +594,11 @@ impl Interface {
                                     if let Err(e) = bridge.fdb_dynamic.update_entry(src_addr, port) {
                                         net_debug!("Failed to update dynamic FDB for source address: {:?}", e);
                                     }
-                        
+                                    
                                     println!("forward_to_bridge: forwarding to port {}", port);
                                     if let Some(port) = bridge.ports.get_mut(&port) {
+                                        let mut port_iface = port.create_interface();
+                                        
                                         let port_device = port.get_port_device();
                                         let mut binding = match port_device.try_lock() {
                                             Ok(lock) => lock,
@@ -605,27 +608,19 @@ impl Interface {
                                             }
                                         };
 
-                                            // 获取内部设备的可变引用
-                                            let inner_device = match Arc::get_mut(&mut binding.inner) {
-                                                Some(inner) => inner,
-                                                None => {
-                                                    net_debug!("Cannot get mutable reference to Arc");
-                                                    continue; // 或者返回错误
-                                                }
-                                            };
-
+                                        let inner_device = binding.get_inner_mut();
                                         let Some((_, tx_tokenx)) = inner_device.receive(self.inner.now) else {
                                             continue;
                                         };
-                
-                                        if let Some(packet) = port.port_iface.inner.process_ethernet(
+
+                                        if let Some(packet) = port_iface.inner.process_ethernet(
                                             sockets,
                                             rx_meta,
                                             eth_frame.as_ref(),
                                             &mut self.fragments,
                                         ) {
                                             let tx_token_wrapper = TxTokenWrapper::new(tx_tokenx);
-                                            if let Err(err) = port.port_iface.inner.dispatch(tx_token_wrapper, packet, &mut self.fragmenter) {
+                                            if let Err(err) = port_iface.inner.dispatch(tx_token_wrapper, packet, &mut self.fragmenter) {
                                                 net_debug!("Failed to send response: {:?}", err);
                                             }
                                         };
@@ -636,7 +631,7 @@ impl Interface {
                             }
                         }
                 
-                        // 如果数据帧是针对传入的Device，继续处理。
+                        // 如果数据帧是针对传入的 Device，继续处理。
                         if let Some(packet) = self.inner.process_ethernet(
                             sockets,
                             rx_meta,
@@ -696,9 +691,10 @@ impl Interface {
                 return None;  // 锁定失败时返回 None
             }
         };
-    
+
         if let Some(bridge_lock) = bridge_result.as_mut() {
             // 获取源端口，如果获取失败则返回错误
+
             let port_num = match bridge_lock.get_port(self) {
                 Some(port) => port,
                 None => {
@@ -711,6 +707,8 @@ impl Interface {
                     max_ports + 1  // 添加边界限制，确保端口号不会超出范围
                 }
             };
+
+            println!("port_num {}", port_num);
     
             // // 学习源 MAC 地址，将其添加到转发表（FDB）
             // if let Err(err) = bridge_lock.fdb_add(src_mac, port_num as usize) {
@@ -719,7 +717,7 @@ impl Interface {
             // }
     
             // 查找目标 MAC 地址对应的端口
-            let dst_ports = bridge_lock.find_dst_ports(dst_mac);
+            let dst_ports = bridge_lock.find_dst_ports(dst_mac) & !(1 << port_num);
 
             println!("check_bridge_ports: dst_ports {}", dst_ports);
     
@@ -745,6 +743,17 @@ impl Interface {
             Exhausted,
             Dispatch(DispatchError),
         }
+
+        // Check if we have a global bridge
+        let bridge_result = GLOBAL_BRIDGE.lock().unwrap();
+
+        // Get the MAC address for the IP
+        let port_num = {
+            let bridge_lock = bridge_result.as_ref().unwrap();
+            bridge_lock.get_port(&self).unwrap()
+        };
+
+        drop(bridge_result);
 
         let mut emitted_any = false;
         // add 
@@ -773,8 +782,11 @@ impl Interface {
                 // Check if we have a global bridge
                 let bridge_result = GLOBAL_BRIDGE.lock().unwrap();
 
+
+
                 if let Some(bridge_lock) = bridge_result.as_ref() {
                     // Get the MAC address for the IP
+
                     if let Some(ip_addr) = neighbor_addr {
                         let dst_mac = neighbor_cache.lookup(&ip_addr, now);
                         println!("socket_egress: dst_mac {:02x?}", dst_mac);
@@ -806,35 +818,42 @@ impl Interface {
                                 let bridge_lock = binding.lock();
                                 let mut bridge = bridge_lock.unwrap();
 
+
                                 // If we have destination ports, use the bridge to forward the packet
                                 if dst_ports != 0 {
                                     if let HardwareAddress::Ethernet(dst_mac) = hw_addr {
                                         println!("socket_egress: dst_mac {:02x?}", dst_mac);
-                                        // Assuming max 8 ports, adjust as needed
-                                        for port in 0..bridge.num_ports { 
-                                            if dst_ports & (1 << port) != 0 {
+                                        for port in 0..bridge.num_ports {
+                                            if dst_ports & (1 << port) != 0 && port != port_num {
                                                 net_debug!("socket_egress: Port {} was successfully found and is now being processed", port);
                                                 if let Some(port) = bridge.ports.get_mut(&port) {
                                                     let port_device = port.get_port_device();
-                                                    let mut binding = match port_device.try_lock() {
-                                                        Ok(lock) => lock,
-                                                        Err(_) => {
-                                                            println!("Port device is currently locked by another thread");
-                                                            continue; // 或者返回错误
-                                                        }
+                                                    let process_result = {
+                                                        let mut port_iface = port.create_interface();
+                                                        let mut port_lock = match port_device.try_lock() {
+                                                            Ok(lock) => lock,
+                                                            Err(_) => {
+                                                                println!("Port device is currently locked by another thread");
+                                                                continue;
+                                                            }
+                                                        };
+                                                        
+                                                        let inner_device = port_lock.get_inner_mut();
+                                                        let tx = match inner_device.transmit(now) {
+                                                            Some(tx) => tx,
+                                                            None => {
+                                                                net_debug!("failed to transmit IP: device exhausted");
+                                                                continue;
+                                                            }
+                                                        };
+                                
+                                                        
+                                                        let tx_token_wrapper = TxTokenWrapper::new(tx);
+                                                        port_iface.inner.dispatch_ip(tx_token_wrapper, meta, response.clone(), &mut self.fragmenter)
                                                     };
-
-                                                    // 根据端口号找设备，
-                                                    let tx = binding.transmit(port.port_iface.inner.now).ok_or_else(|| {
-                                                        net_debug!("failed to transmit IP: device exhausted");
-                                                        EgressError::Exhausted
-                                                    })?;
-                                                    // 发送逻辑中 这个Inner需要修改
-                                                    let tx_token_wrapper = TxTokenWrapper::new(tx);
-                                                    port.port_iface.inner
-                                                        .dispatch_ip(tx_token_wrapper, meta, response.clone(), &mut self.fragmenter)
-                                                        .map_err(EgressError::Dispatch)?;
-                                                    continue;
+                                                    if let Err(err) = process_result {
+                                                        net_debug!("Failed to dispatch IP: {:?}", err);
+                                                    }
                                                 }
                                             } else {
                                                 net_debug!("Port {} is not a target device!", port);
@@ -863,6 +882,8 @@ impl Interface {
                 inner
                     .dispatch_ip(t, meta, response, &mut self.fragmenter)
                     .map_err(EgressError::Dispatch)?;
+
+                println!("------------------------------------------------------------------------------------");
 
                 emitted_any = true;
                 Ok(())

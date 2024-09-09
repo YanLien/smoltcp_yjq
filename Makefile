@@ -45,6 +45,10 @@ server:
 	@rm -rf server
 	$(call build_and_run,server,server,tap0)
 
+udp_mini:
+	@rm -rf udp_mini
+	$(call build_and_run,udp_mini,udp_mini,tap0)
+
 udp_server:
 	@rm -rf udp_server
 	@echo "========== Building udp_server =========="
@@ -58,7 +62,7 @@ udp_server:
 	@cp ./target/release/examples/udp_server udp_server
 	@echo "========== Build Done =========="
 	@echo "Starting udp_server with TAP device tap0"
-	@sudo RUST_BACKTRACE=full ./udp_server
+	@sudo ./udp_server
 # @rm -rf udp_server
 	
 # $(call build_and_run,udp_server,udp_server,tap0)

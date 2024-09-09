@@ -1,8 +1,7 @@
-use std::sync::{Arc, Mutex, RwLock};
+use std::sync::{Arc, Mutex};
 use lazy_static::lazy_static;
-use crate::phy::TunTapInterface;
 use crate::wire::{EthernetAddress, EthernetFrame};
-use crate::iface::Interface;
+use crate::iface::{Config, Interface};
 
 use super::bridge::BridgeWrapper;
 
@@ -30,13 +29,13 @@ pub fn initialize_bridge(
 }
 
 pub fn add_port(
-    port_iface: Interface,
-    port_device: Arc<Mutex<BridgeDevice>>,
+    port_config: Config,
+    port_device: BridgeDevice,
     port_num: u8
 ) -> Result<(), &'static str> {
     let mut bridge_guard = GLOBAL_BRIDGE.lock().unwrap();
     if let Some(bridge) = bridge_guard.as_mut() {
-        bridge.add_port(port_iface, port_device, port_num)
+        bridge.add_port(port_config, port_device, port_num)
     } else {
         Err("Bridge is not initialized")
     }

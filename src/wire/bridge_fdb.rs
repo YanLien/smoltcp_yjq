@@ -5,7 +5,7 @@ use std::time::Instant;
 use super::EthernetAddress;
 
 const BRIDGEIF_AGE_TIMER_MS: usize = 1000;
-const BR_FDB_TIMEOUT_SEC: Duration = Duration::from_secs(60 * 5); //5 minutes FDB timeout
+const BR_FDB_TIMEOUT_SEC: Duration = Duration::from_secs(60 * 5);   //5 minutes FDB timeout
 pub const MAX_FDB_ENTRIES: usize = 1024;
 pub type BridgeifPortmask = u8;
 pub const BR_FLOOD: BridgeifPortmask = !0;
@@ -24,7 +24,7 @@ pub struct BridgeDfdb {
 }
 
 impl BridgeDfdb {
-    // 初始化FDB
+    // 初始化 FDB
     pub fn new(max_entries: u16) -> Self {
         let mut fdb = HashMap::new();
         for _ in 0..max_entries {
@@ -84,8 +84,8 @@ impl BridgeDfdb {
                 let entry = entry.get_mut();
                 if entry.ts.elapsed() < BR_FDB_TIMEOUT_SEC {
                     println!("br: update src {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x} (from {}) @ existing entry",
-                             src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
-                             port_idx);
+                            src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
+                            port_idx);
                     entry.ts = Instant::now();
                     entry.port = port_idx;
                 } else {
@@ -96,8 +96,8 @@ impl BridgeDfdb {
                         ts: Instant::now(),
                     };
                     println!("br: update src {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x} (from {}) @ expired entry",
-                             src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
-                             port_idx);
+                            src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
+                            port_idx);
                 }
             },
             hash_map::Entry::Vacant(entry) => {
@@ -107,18 +107,21 @@ impl BridgeDfdb {
                     ts: Instant::now(),
                 });
                 println!("br: create src {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x} (from {}) @ new entry",
-                         src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
-                         port_idx);
+                        src_addr.0[0], src_addr.0[1], src_addr.0[2], src_addr.0[3], src_addr.0[4], src_addr.0[5],
+                        port_idx);
             }
         }
     }
 
-    // 用于根据目的MAC地址查找应该转发到哪个端口
+    // 用于根据目的 MAC 地址查找应该转发到哪个端口
     pub fn get_dst_ports(&self, dst_addr: &EthernetAddress) -> BridgeifPortmask {
         let fdb = self.fdb.lock().unwrap();
 
+        println!("dfdb {:02x?}", fdb);
+
         fdb.get(dst_addr).map_or(255, |entry| {
             if entry.used && entry.ts.elapsed() < BR_FDB_TIMEOUT_SEC {
+                println!("get_dst_ports {}", 1 << entry.port);
                 1 << entry.port
             } else {
                 BR_FLOOD
@@ -137,8 +140,8 @@ impl BridgeDfdb {
                 true // 保留未过期的条目
             } else {
                 println!("br: age out {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}",
-                         addr.0[0], addr.0[1], addr.0[2],
-                         addr.0[3], addr.0[4], addr.0[5]);
+                        addr.0[0], addr.0[1], addr.0[2],
+                        addr.0[3], addr.0[4], addr.0[5]);
                 false // 删除过期的条目
             }
         });
@@ -184,12 +187,13 @@ impl BridgeDfdb {
         fdb.clear();
     }
 
-    pub fn len(&self) -> usize {
-        let fdb = self.fdb.lock().unwrap();
-        fdb.len()
-    }
+    // pub fn len(&self) -> usize {
+    //     let fdb = self.fdb.lock().unwrap();
+    //     fdb.len()
+    // }
 
     pub fn is_full(&self) -> bool {
-        self.len() >= self.max_fdb_entries as usize
+        let fdb = self.fdb.lock().unwrap();
+        fdb.len() >= self.max_fdb_entries as usize
     }
 }

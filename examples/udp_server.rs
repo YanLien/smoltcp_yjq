@@ -1,9 +1,9 @@
 mod utils;
+// mod bridge_config;
 
 use log::debug;
-use std::sync::Arc;
 use std::os::unix::io::AsRawFd;
-use smoltcp::wire::bridge_device::{DeviceWrapper, NetworkManager};
+use smoltcp::wire::bridge_device::BridgeDevice;
 use smoltcp::wire::global_bridge::{add_port, initialize_bridge, GLOBAL_BRIDGE};
 
 use smoltcp::socket::udp;
@@ -56,43 +56,22 @@ fn main() {
     
     println!("init bridge");
     let time = smoltcp::time::Instant::now();
-    let mut network_manager = NetworkManager::new();
+    // let mut network_manager = NetworkManager::new();
+
     // 获取或创建设备
     let tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
-    let tap1 = TunTapInterface::new("tap1", Medium::Ethernet).unwrap();
-    let tap2 = TunTapInterface::new("tap2", Medium::Ethernet).unwrap();
-
     let fd = tap0.as_raw_fd();
+    let device1 = BridgeDevice::new(tap0);
+
+    let tap1 = TunTapInterface::new("tap1", Medium::Ethernet).unwrap();
+    let device2 = BridgeDevice::new(tap1);
+
+    let tap2 = TunTapInterface::new("tap2", Medium::Ethernet).unwrap();
+    let device3 = BridgeDevice::new(tap2);
 
     let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
     let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
     let config3 = Config::new(HardwareAddress::Ethernet(get_port3_mac()));
-
-    let device1 = network_manager.get_or_create_device("tap0", tap0);
-    let device2 = network_manager.get_or_create_device("tap1", tap1);
-    let device3 = network_manager.get_or_create_device("tap2", tap2);
-        
-    // 创建 DeviceWrapper 实例和接口
-    let (_tap0, iface1) = {
-        let device = device1.lock().unwrap();
-        let mut wrapper = DeviceWrapper::new(Arc::clone(&device.inner));
-        let iface = Interface::new(config1, &mut wrapper, time);
-        (wrapper, iface)
-    };
-
-    let (_tap1, iface2) = {
-        let device = device2.lock().unwrap();
-        let mut wrapper = DeviceWrapper::new(Arc::clone(&device.inner));
-        let iface = Interface::new(config2, &mut wrapper, time);
-        (wrapper, iface)
-    };
-
-    let (_tap2, iface3) = {
-        let device = device3.lock().unwrap();
-        let mut wrapper = DeviceWrapper::new(Arc::clone(&device.inner));
-        let iface = Interface::new(config3, &mut wrapper, time);
-        (wrapper, iface)
-    };
 
     // 初始化网桥
     initialize_bridge(
@@ -104,37 +83,40 @@ fn main() {
         MAX_PORTS // 最大端口数
     ).unwrap();
 
-    add_port(iface1, Arc::clone(&device1), 0).expect("Failed to add port 1");
-    add_port(iface2, Arc::clone(&device2), 1).expect("Failed to add port 2");
-    add_port(iface3, Arc::clone(&device3), 2).expect("Failed to add port 3");
+    add_port(config1, device1, 0).expect("Failed to add port 0");
+    add_port(config2, device2, 1).expect("Failed to add port 1");
+    add_port(config3, device3, 2).expect("Failed to add port 2");
 
     let mut bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
     if let Some(bridge_lock) = bridge_guard.as_mut() {
-        bridge_lock.fdb_add(&get_port1_mac(), 1)
-            .expect("Failed to add static FDB entry 1");
+        bridge_lock.fdb_add(&get_port1_mac(), 0)
+            .expect("Failed to add static FDB entry 0");
         println!("Added static FDB entry: 02:00:00:00:00:02 -> Port 1");
 
-        bridge_lock.fdb_add(&get_port2_mac(), 2)
-            .expect("Failed to add static FDB entry 2");
+        bridge_lock.fdb_add(&get_port2_mac(), 1)
+            .expect("Failed to add static FDB entry 1");
         println!("Added static FDB entry: 02:00:00:00:00:03 -> Port 2");
         
-        bridge_lock.fdb_add(&get_port3_mac(), 3)
+        bridge_lock.fdb_add(&get_port3_mac(), 2)
             .expect("Failed to add static FDB entry 2");
         println!("Added static FDB entry: 02:00:00:00:00:04 -> Port 3");
     }
+    
     drop(bridge_guard);
 
-    // Create interface
-    let mut config = Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x02]).into());
+    // Get interface
+    let bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let bridge = bridge_guard.as_ref().expect("Failed to get bridge");
 
+    let mut bridge = bridge.get_bridgeport(0).unwrap();
+
+    let mut config = Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x02]).into());
     config.random_seed = rand::random();
 
-    let mut tap0 = {
-        let device = device1.lock().unwrap();
-        DeviceWrapper::new(Arc::clone(&device.inner))
-    };
+    bridge.add_config(config);
 
-    let mut iface = Interface::new(config, &mut tap0, Instant::now());
+    let mut iface = bridge.create_interface();
+
     iface.update_ip_addrs(|ip_addrs| {
         ip_addrs
             .push(IpCidr::new(IpAddress::v4(192, 168, 69, 1), 24))
@@ -167,10 +149,15 @@ fn main() {
     let mut sockets = SocketSet::new(vec![]);
     let udp_handle = sockets.add(udp_socket);
 
+    drop(bridge_guard);
+
     loop {
         let timestamp = Instant::now();
 
-        iface.poll(timestamp, &mut tap0, &mut sockets);
+        let mut device = bridge.port_device.lock().unwrap();
+        let bridge_device = BridgeDevice::as_mut_bridge_device(&mut device.inner);
+        
+        iface.poll(timestamp, bridge_device, &mut sockets);
 
         // udp:6969: respond "hello"
         let socket = sockets.get_mut::<udp::Socket>(udp_handle);

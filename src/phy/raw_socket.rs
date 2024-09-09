@@ -123,7 +123,7 @@ impl phy::TxToken for TxToken {
     where
         F: FnOnce(&mut [u8]) -> R,
     {
-        let mut lower = self.lower.lock().unwrap();;
+        let mut lower = self.lower.lock().unwrap();
         let mut buffer = vec![0; len];
         let result = f(&mut buffer);
         match lower.send(&buffer[..]) {
