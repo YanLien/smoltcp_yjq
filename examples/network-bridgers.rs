@@ -2,7 +2,6 @@ use std::sync::Mutex;
 use std::time::Duration;
 use std::thread;
 
-use smoltcp::config;
 use smoltcp::iface::{Config, Interface};
 use smoltcp::phy::{Loopback, Medium};
 use smoltcp::time::Instant;
@@ -39,28 +38,29 @@ lazy_static::lazy_static! {
         let device1 = Loopback::new(Medium::Ethernet);
         let device2 = Loopback::new(Medium::Ethernet);
         
-        let mut device1 = BridgeDevice::new(device1);
-        let mut device2 = BridgeDevice::new(device2);
+        let device1 = BridgeDevice::new(device1);
+        let device2 = BridgeDevice::new(device2);
 
         let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
         let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
 
-        let iface1 = Interface::new(config1, &mut device1, time);
-        let iface2 = Interface::new(config2, &mut device2, time);
+        // let iface1 = Interface::new(config1, &mut device1, time);
+        // let iface2 = Interface::new(config2, &mut device2, time);
 
         let bridge_config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 
         let bridge = BridgeWrapper::new(
             Interface::new(bridge_config, &mut Loopback::new(Medium::Ethernet), time),
             get_bridge_mac(),
-            MAX_PORTS
+            MAX_PORTS,
+            Instant::now(),
         );
 
-        bridge.add_port(config1, device1, 1).expect("Failed to add port 1");
-        bridge.add_port(config2, device2, 2).expect("Failed to add port 2");
+        bridge.add_port(config1, device1, 1, Instant::now()).expect("Failed to add port 1");
+        bridge.add_port(config2, device2, 2, Instant::now()).expect("Failed to add port 2");
 
         let bridge_arc = bridge.get_bridge();
-        let bridge_inner = bridge_arc.lock().unwrap();
+        let bridge_inner = bridge_arc.lock();
         
         bridge_inner.fdb_add(&EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x01]), 1)
             .expect("Failed to add static FDB entry 1");
@@ -114,7 +114,7 @@ fn sender_thread() {
 
         let bridge = BRIDGE.lock().unwrap();
         let iframe = EthernetFrame::new_unchecked(frame.as_ref());
-        match bridge.process_frame(&iframe, 0) {
+        match bridge.process_frame(&iframe, 0, Instant::now()) {
             Ok(_) => println!("Frame processed successfully"),
             Err(e) => println!("Error processing frame: {}", e),
         }
@@ -126,10 +126,11 @@ fn sender_thread() {
 }
 
 fn receiver_thread() {
+    let time = Instant::now();
     loop {
         let bridge = BRIDGE.lock().unwrap();
         
-        if let Some((port, frame_data)) = bridge.receive_frame() {
+        if let Some((port, frame_data)) = bridge.receive_frame(time) {
             println!("Received frame at Port {}", port + 1);
     
             if let Ok(eth_frame) = EthernetFrame::new_checked(&frame_data) {

@@ -235,7 +235,7 @@ impl InterfaceInner {
         let arp_packet = check!(ArpPacket::new_checked(eth_frame.payload()));
         let arp_repr = check!(ArpRepr::parse(&arp_packet));
 
-        println!("process_arp::{}", arp_repr);
+        debug!("process_arp::{}", arp_repr);
 
         match arp_repr {
             ArpRepr::EthernetIpv4 {

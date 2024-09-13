@@ -53,17 +53,18 @@ fn main() -> io::Result<()> {
     initialize_bridge(
         Interface::new(config, &mut Loopback::new(Medium::Ethernet), time),
         EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x00]),
-        MAX_PORTS // 最大端口数
+        MAX_PORTS, // 最大端口数
+        Instant::now(),
     ).unwrap();
 
     // 添加端口到网桥
-    add_port(config1, device1, 0).expect("Failed to add port 0");
-    add_port(config2, device2, 1).expect("Failed to add port 1");
-    add_port(config3, device3, 2).expect("Failed to add port 2");
-    add_port(config4, device4, 3).expect("Failed to add port 3");
-    add_port(config5, device5, 4).expect("Failed to add port 4");
+    add_port(config1, device1, 0, Instant::now()).expect("Failed to add port 0");
+    add_port(config2, device2, 1, Instant::now()).expect("Failed to add port 1");
+    add_port(config3, device3, 2, Instant::now()).expect("Failed to add port 2");
+    add_port(config4, device4, 3, Instant::now()).expect("Failed to add port 3");
+    add_port(config5, device5, 4, Instant::now()).expect("Failed to add port 4");
 
-    let mut bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let mut bridge_guard = GLOBAL_BRIDGE.lock();
     if let Some(bridge_lock) = bridge_guard.as_mut() {
         bridge_lock.fdb_add(&get_port1_mac(), 0)
             .expect("Failed to add static FDB entry 0");
@@ -103,7 +104,7 @@ fn main() -> io::Result<()> {
 fn alternating_thread(tap1_ip: Ipv4Address, tap2_ip: Ipv4Address, fd1: i32, fd2: i32) {
 
     // Get interface
-    let bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let bridge_guard = GLOBAL_BRIDGE.lock();
     let bridge = bridge_guard.as_ref().expect("Failed to get bridge");
     
     let mut tap1 = bridge.get_bridgeport(1).unwrap();
@@ -111,12 +112,12 @@ fn alternating_thread(tap1_ip: Ipv4Address, tap2_ip: Ipv4Address, fd1: i32, fd2:
 
     drop(bridge_guard);
 
-    let mut iface1 = tap1.create_interface();
+    let mut iface1 = tap1.create_interface(Instant::now());
     iface1.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::from(tap1_ip), 24)).unwrap();
     });
 
-    let mut iface2 = tap2.create_interface();
+    let mut iface2 = tap2.create_interface(Instant::now());
     iface2.update_ip_addrs(|ip_addrs| {
         ip_addrs.push(IpCidr::new(IpAddress::from(tap2_ip), 24)).unwrap();
     });
@@ -138,7 +139,7 @@ fn alternating_thread(tap1_ip: Ipv4Address, tap2_ip: Ipv4Address, fd1: i32, fd2:
         let timestamp1 = Instant::now();
         // 处理发送
         {    
-            let mut device1 = tap1.port_device.lock().unwrap();
+            let mut device1 = tap1.port_device.lock();
             let bridge_device1 = BridgeDevice::as_mut_bridge_device(&mut device1.inner);
             
             iface1.poll(timestamp1, bridge_device1, &mut sockets1);
@@ -165,7 +166,7 @@ fn alternating_thread(tap1_ip: Ipv4Address, tap2_ip: Ipv4Address, fd1: i32, fd2:
         let timestamp2 = Instant::now();
         // 处理接收
         {
-            let mut device2 = tap2.port_device.lock().unwrap();
+            let mut device2 = tap2.port_device.lock();
             let bridge_device2 = BridgeDevice::as_mut_bridge_device(&mut device2.inner);
             
             iface2.poll(timestamp2, bridge_device2, &mut sockets2);

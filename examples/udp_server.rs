@@ -26,7 +26,6 @@ pub const PORT5_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x06];
 // Bridge Max Ports
 pub const MAX_PORTS: u8 = 8;
 
-
 pub fn get_bridge_mac() -> EthernetAddress {
     EthernetAddress::from_bytes(&BRIDGE_MAC)
 }
@@ -80,14 +79,15 @@ fn main() {
             &mut Loopback::new(Medium::Ethernet), 
             time),
         EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x00]),
-        MAX_PORTS // 最大端口数
+        MAX_PORTS, // 最大端口数
+        Instant::now(),
     ).unwrap();
 
-    add_port(config1, device1, 0).expect("Failed to add port 0");
-    add_port(config2, device2, 1).expect("Failed to add port 1");
-    add_port(config3, device3, 2).expect("Failed to add port 2");
+    add_port(config1, device1, 0, Instant::now()).expect("Failed to add port 0");
+    add_port(config2, device2, 1, Instant::now()).expect("Failed to add port 1");
+    add_port(config3, device3, 2, Instant::now()).expect("Failed to add port 2");
 
-    let mut bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let mut bridge_guard = GLOBAL_BRIDGE.lock();
     if let Some(bridge_lock) = bridge_guard.as_mut() {
         bridge_lock.fdb_add(&get_port1_mac(), 0)
             .expect("Failed to add static FDB entry 0");
@@ -105,7 +105,7 @@ fn main() {
     drop(bridge_guard);
 
     // Get interface
-    let bridge_guard = GLOBAL_BRIDGE.lock().expect("Failed to get bridge");
+    let bridge_guard = GLOBAL_BRIDGE.lock();
     let bridge = bridge_guard.as_ref().expect("Failed to get bridge");
 
     let mut bridge = bridge.get_bridgeport(0).unwrap();
@@ -115,7 +115,7 @@ fn main() {
 
     bridge.add_config(config);
 
-    let mut iface = bridge.create_interface();
+    let mut iface = bridge.create_interface(Instant::now());
 
     iface.update_ip_addrs(|ip_addrs| {
         ip_addrs
@@ -154,7 +154,7 @@ fn main() {
     loop {
         let timestamp = Instant::now();
 
-        let mut device = bridge.port_device.lock().unwrap();
+        let mut device = bridge.port_device.lock();
         let bridge_device = BridgeDevice::as_mut_bridge_device(&mut device.inner);
         
         iface.poll(timestamp, bridge_device, &mut sockets);

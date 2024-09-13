@@ -1,8 +1,6 @@
-use std::collections::HashMap;
-use std::marker::PhantomData;
-
-use crate::phy::{Device, DeviceCapabilities, RxToken, TxToken};
-use crate::time::Instant;
+use core::marker::PhantomData;
+use alloc::{boxed::Box, collections::BTreeMap, string::String, vec::Vec};
+use crate::{phy::{Device, DeviceCapabilities, RxToken, TxToken}, time::Instant};
 
 pub trait ObjectSafeDeviceOps {
     fn capabilities(&self) -> DeviceCapabilities;
@@ -299,13 +297,13 @@ pub fn boxed_object_safe_device<D: Device + 'static>(device: D) -> Box<dyn Objec
 }
 
 pub struct NetworkManager {
-    devices: HashMap<String, BridgeDevice>,
+    devices: BTreeMap<String, BridgeDevice>,
 }
 
 impl NetworkManager {
     pub fn new() -> Self {
         NetworkManager {
-            devices: HashMap::new(),
+            devices: BTreeMap::new(),
         }
     }
 
