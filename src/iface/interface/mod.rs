@@ -457,12 +457,14 @@ impl Interface {
 
         loop {
             let mut did_something = false;
-            did_something |= self.socket_ingress(device, sockets);
-
-            // println!("poll: did_something_socket_ingress: {}", did_something);
             
+            did_something |= self.socket_ingress(device, sockets);
             did_something |= self.socket_egress(device, sockets);
 
+
+            // println!("poll: did_something_socket_egress: {}", did_something);
+            
+            
             // println!("poll: did_something_socket_egress: {}", did_something);
             
             #[cfg(feature = "proto-igmp")]
@@ -535,9 +537,9 @@ impl Interface {
         D: Device + ?Sized,
     {
         let mut processed_any = false;
-        debug!("socket_ingress: rx_token, test");
+        // debug!("socket_ingress: rx_token, test");
         let Some((rx_token, tx_token)) = device.receive(self.inner.now) else {
-            debug!("socket_ingress: no rx_token, return false");
+            // debug!("socket_ingress: no rx_token, return false");
             return processed_any;
         };
 
@@ -599,7 +601,7 @@ impl Interface {
                                     debug!("forward_to_bridge: forwarding to port {}", port);
                                     if let Some(port) = bridge.ports.get_mut(&port) {
                                         let mut port_iface = port.create_interface(port.get_instant());
-                                        
+
                                         let port_device = port.get_port_device();
                                         let mut binding = port_device.lock();
 
@@ -697,6 +699,7 @@ impl Interface {
                 }
             };
 
+            // 源端口(掩码)
             debug!("port_num {}", port_num);
     
             // // 学习源 MAC 地址，将其添加到转发表（FDB）
@@ -706,7 +709,7 @@ impl Interface {
             // }
     
             // 查找目标 MAC 地址对应的端口
-            let dst_ports = bridge_lock.find_dst_ports(dst_mac) & !(1 << port_num);
+            let dst_ports = bridge_lock.find_dst_ports(dst_mac) & !port_num;
 
             debug!("check_bridge_ports: dst_ports {}", dst_ports);
     
@@ -770,6 +773,7 @@ impl Interface {
                 debug!("socket_egress: response {:?}", response);
 
                 if let Some(port_num) = port_num {
+                    debug!("socket_egress: port_num {}", port_num);
                     // Check if we have a global bridge
                     let bridge_result = GLOBAL_BRIDGE.lock();
 
@@ -801,7 +805,7 @@ impl Interface {
                                         }
                                     };
 
-                                    debug!("socket_egress: dst_ports {}", dst_ports);
+                                    debug!("socket_egress: dst_ports {}", dst_ports); // 掩码
 
                                     let binding = bridge_lock.get_bridge();
                                     let bridge_lock = binding.lock();
@@ -812,6 +816,7 @@ impl Interface {
                                         if let HardwareAddress::Ethernet(dst_mac) = hw_addr {
                                             debug!("socket_egress: dst_mac {:02x?}", dst_mac);
                                             for port in 0..bridge.num_ports {
+                                                debug!("  {} {}", port, port_num);
                                                 if dst_ports & (1 << port) != 0 && port != port_num {
                                                     net_debug!("socket_egress: Port {} was successfully found and is now being processed", port);
                                                     if let Some(port) = bridge.ports.get_mut(&port) {
@@ -1140,12 +1145,15 @@ impl InterfaceInner {
     }
 
     fn route(&self, addr: &IpAddress, timestamp: Instant) -> Option<IpAddress> {
+        debug!("addr {}, timestamp {}", addr, timestamp);
         // Send directly.
         // note: no need to use `self.is_broadcast()` to check for subnet-local broadcast addrs
         //       here because `in_same_network` will already return true.
         if self.in_same_network(addr) || addr.is_broadcast() {
             return Some(*addr);
         }
+
+        debug!("addr {}, timestamp {}", addr, timestamp);
 
         // Route via a router.
         self.routes.lookup(addr, timestamp)

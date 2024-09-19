@@ -16,7 +16,7 @@ use std::io;
 use std::thread;
 use std::time::Duration;
 use std::os::unix::io::AsRawFd;
-use smoltcp::iface::{Config, Interface, SocketSet};
+use smoltcp::iface::{Config, SocketSet};
 use smoltcp::phy::{wait as phy_wait, Medium};
 use smoltcp::socket::udp;
 use smoltcp::time::Instant;
@@ -24,9 +24,7 @@ use smoltcp::wire::{EthernetAddress, IpAddress, IpCidr, Ipv4Address};
 
 fn main() -> io::Result<()> {
     utils::setup_logging("");
-
     println!("init bridge");
-    let time = smoltcp::time::Instant::now();
 
     let tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
     let device1 = BridgeDevice::new(tap0);
@@ -51,7 +49,8 @@ fn main() -> io::Result<()> {
 
     // 初始化网桥
     initialize_bridge(
-        Interface::new(config, &mut Loopback::new(Medium::Ethernet), time),
+        config, 
+        Loopback::new(Medium::Ethernet),
         EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x00]),
         MAX_PORTS, // 最大端口数
         Instant::now(),

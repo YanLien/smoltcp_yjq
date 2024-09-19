@@ -4,7 +4,7 @@ use alloc::vec;
 use spin::Mutex;
 use alloc::{collections::BTreeMap, sync::Arc, vec::Vec};
 use crate::{iface::{Config, Interface}, phy::{Device, DeviceCapabilities, RxToken, TxToken}, time::Instant};
-use super::{bridge_device::BridgeDevice, bridge_fdb::{BridgeifPortmask, BR_FLOOD, MAX_FDB_ENTRIES}, EthernetAddress, EthernetFrame};
+use super::{bridge_device::BridgeDevice, bridge_fdb::{BridgeDfdb, BridgeifPortmask, BR_FLOOD, MAX_FDB_ENTRIES}, EthernetAddress, EthernetFrame};
 
 const MAX_FRAME_SIZE: usize = 1522; // 略大于标准以太网帧的最大大小
 
@@ -233,14 +233,14 @@ impl BridgeSfdb {
 }
 
 pub struct Bridge {
-    // pub config: Config,                         // 网桥自己的 netif
+    // pub config: Config,                         // 网桥自己的 Config
     // pub device: Arc<Mutex<BridgeDevice>>,       // 网桥自己的设备
     pub ethaddr: EthernetAddress,               // 网桥的 MAC 地址
     pub max_ports: u8,                          // 端口的最大数量
     pub num_ports: u8,                          // 端口的当前数量
     pub ports: BTreeMap<u8, BridgePort>,        // 端口列表
     pub fdb_static: BridgeSfdb,
-    // pub fdb_dynamic: BridgeDfdb,
+    pub fdb_dynamic: BridgeDfdb,
 }
 
 #[derive(Clone)]
@@ -258,15 +258,17 @@ impl fmt::Debug for BridgeWrapper {
 }
 
 impl BridgeWrapper {
-    pub fn new(_iface: Interface, ethaddr: EthernetAddress, max_ports: u8, _ts: Instant) -> Self {
+    pub fn new<D: Device + 'static>(_config: Config, device: D, ethaddr: EthernetAddress, max_ports: u8, ts: Instant) -> Self {
+        let _device = Arc::new(Mutex::new(BridgeDevice::new(device)));
         BridgeWrapper(Arc::new(Mutex::new(Bridge {
-            // iface,
+            // config,
+            // device,
             ethaddr,
             max_ports,
             num_ports: 0,
             ports: BTreeMap::new(),
             fdb_static: BridgeSfdb::new(MAX_FDB_ENTRIES as u16),
-            // fdb_dynamic: BridgeDfdb::new(MAX_FDB_ENTRIES as u16, ts),
+            fdb_dynamic: BridgeDfdb::new(MAX_FDB_ENTRIES as u16, ts),
         })))
     }
 
@@ -295,7 +297,6 @@ impl BridgeWrapper {
         let port = BridgePort {
             port_now,
             port_config,
-            // port_iface,
             port_device,
             port_num,
         };
@@ -350,7 +351,7 @@ impl BridgeWrapper {
     }
 
     // pub fn age_fdb(&self, now: Instant) {
-    //     let bridge = self.0.lock().unwrap();
+    //     let bridge = self.0.lock();
     //     bridge.fdb_dynamic.age_entries(now);
     // }
 
@@ -393,7 +394,7 @@ impl BridgeWrapper {
         let bridge = self.0.lock();
         let mask  = (0..bridge.num_ports).fold(0, |acc, i| acc | (1 << i));
         if let Some(entry) = bridge.fdb_static.get_entry(dst_addr) {
-            return (entry.dst_ports & mask) as u8;
+            return (1 <<entry.dst_ports & mask) as u8;
         } else {
             return BR_FLOOD & mask as u8;
         }
@@ -450,8 +451,7 @@ impl Bridge {
             return BR_FLOOD;
         }
 
-        0
-        // self.fdb_dynamic.get_dst_ports(dst_addr)
+        self.fdb_dynamic.get_dst_ports(dst_addr)
     }
 
     pub fn remove_port(&mut self, port_num: u8) -> Option<BridgePort> {

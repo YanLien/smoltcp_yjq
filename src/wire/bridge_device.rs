@@ -75,14 +75,12 @@ impl<D: Device> Device for ObjectSafeDevice<D> {
     }
 
     fn receive(&mut self, timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
-        // println!("ObjectSafeDevice receive called");
         self.inner.receive(timestamp).map(|(rx, tx)| {
             (ObjectSafeRxToken::new(rx), ObjectSafeTxToken::new(tx))
         })
     }
 
     fn transmit(&mut self, timestamp: Instant) -> Option<Self::TxToken<'_>> {
-        // println!("ObjectSafeDevice transmit called");
         self.inner.transmit(timestamp).map(ObjectSafeTxToken::new)
     }
 }
@@ -332,11 +330,12 @@ impl NetworkManager {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use log::debug;
     use crate::phy::{Loopback, TunTapInterface, Medium};
 
     #[test]
     fn test_compatible_object_safe_devices() {
-        // println!("Testing compatible object-safe devices");
+        debug!("Testing compatible object-safe devices");
 
         // Create a Loopback device
         let loopback = Loopback::new(Medium::Ethernet);
@@ -348,11 +347,11 @@ mod tests {
 
         if let Some((rx, tx)) = Device::receive(&mut object_safe_loopback, Instant::now()) {
             rx.consume(|buffer| {
-                println!("Received {} bytes (static dispatch)", buffer.len());
+                debug!("Received {} bytes (static dispatch)", buffer.len());
             });
             tx.consume(64, |buffer| {
                 buffer.fill(0);
-                println!("Transmitted {} bytes (static dispatch)", buffer.len());
+                debug!("Transmitted {} bytes (static dispatch)", buffer.len());
             });
         }
 
@@ -367,7 +366,7 @@ mod tests {
             });
             tx.consume_with(64, &mut |buffer| {
                 buffer.fill(0);
-                println!("Transmitted {} bytes (dynamic dispatch)", buffer.len());
+                debug!("Transmitted {} bytes (dynamic dispatch)", buffer.len());
             });
         }
 
@@ -393,6 +392,6 @@ mod tests {
             }
         }
 
-        println!("Compatible object-safe devices test completed successfully");
+        debug!("Compatible object-safe devices test completed successfully");
     }
 }

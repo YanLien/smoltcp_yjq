@@ -1,61 +1,22 @@
 mod utils;
-// mod bridge_config;
+mod bridge_config;
 
 use log::debug;
 use std::os::unix::io::AsRawFd;
 use smoltcp::wire::bridge_device::BridgeDevice;
 use smoltcp::wire::global_bridge::{add_port, initialize_bridge, GLOBAL_BRIDGE};
+use crate::bridge_config::{MAX_PORTS, get_bridge_mac, get_port3_mac, get_port2_mac, get_port1_mac};
 
 use smoltcp::socket::udp;
 use smoltcp::time::Instant;
-use smoltcp::iface::{Config, Interface, SocketSet};
+use smoltcp::iface::{Config, SocketSet};
 use smoltcp::phy::{wait as phy_wait, Loopback, Medium, TunTapInterface};
 use smoltcp::wire::{EthernetAddress, HardwareAddress, IpAddress, IpCidr, Ipv4Address, Ipv6Address};
-
-pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
-// phy::TunTapInterface: tap0
-pub const PORT1_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x02];
-// phy::TunTapInterface: tap1
-pub const PORT2_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x03];
-// phy::TunTapInterface: tap2
-pub const PORT3_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x04];
-// phy::Loopback
-pub const PORT4_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x05];
-// phy::Loopback
-pub const PORT5_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x06];
-// Bridge Max Ports
-pub const MAX_PORTS: u8 = 8;
-
-pub fn get_bridge_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&BRIDGE_MAC)
-}
-
-pub fn get_port1_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT1_MAC)
-}
-
-pub fn get_port2_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT2_MAC)
-}
-
-pub fn get_port3_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT3_MAC)
-}
-
-pub fn get_port4_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT4_MAC)
-}
-
-pub fn get_port5_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT5_MAC)
-}
 
 fn main() {
     utils::setup_logging("");
     
     println!("init bridge");
-    let time = smoltcp::time::Instant::now();
-    // let mut network_manager = NetworkManager::new();
 
     // 获取或创建设备
     let tap0 = TunTapInterface::new("tap0", Medium::Ethernet).unwrap();
@@ -74,10 +35,8 @@ fn main() {
 
     // 初始化网桥
     initialize_bridge(
-        Interface::new(
-            Config::new(HardwareAddress::Ethernet(get_bridge_mac())), 
-            &mut Loopback::new(Medium::Ethernet), 
-            time),
+        Config::new(HardwareAddress::Ethernet(get_bridge_mac())),
+        Loopback::new(Medium::Ethernet), 
         EthernetAddress::from_bytes(&[0x02, 0x00, 0x00, 0x00, 0x00, 0x00]),
         MAX_PORTS, // 最大端口数
         Instant::now(),

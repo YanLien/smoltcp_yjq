@@ -1,4 +1,5 @@
 use heapless::Vec;
+use log::debug;
 
 use crate::config::IFACE_MAX_ROUTE_COUNT;
 use crate::time::Instant;
@@ -148,6 +149,8 @@ impl Routes {
 
     pub(crate) fn lookup(&self, addr: &IpAddress, timestamp: Instant) -> Option<IpAddress> {
         assert!(addr.is_unicast());
+
+        debug!("storage {:?}", self.storage);
 
         self.storage
             .iter()

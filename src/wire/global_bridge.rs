@@ -1,15 +1,16 @@
 use spin::Mutex;
 use alloc::{sync::Arc, vec::Vec};
 use lazy_static::lazy_static;
-use crate::{iface::{Config, Interface}, time::Instant, wire::{EthernetAddress, EthernetFrame}};
+use crate::{iface::Config, phy::Device, time::Instant, wire::{EthernetAddress, EthernetFrame}};
 use super::{bridge::BridgeWrapper, bridge_device::BridgeDevice, bridge_fdb::BridgeifPortmask};
 
 lazy_static! {
     pub static ref GLOBAL_BRIDGE: Arc<Mutex<Option<BridgeWrapper>>> = Arc::new(Mutex::new(None));
 }
 
-pub fn initialize_bridge(
-    iface: Interface,
+pub fn initialize_bridge<D: Device + 'static>(
+    config: Config,
+    device: D,
     ethaddr: EthernetAddress,
     max_ports: u8,
     ts: Instant
@@ -19,7 +20,7 @@ pub fn initialize_bridge(
         return Err("Bridge is already initialized");
     }
 
-    let bridge_wrapper = BridgeWrapper::new(iface, ethaddr, max_ports, ts);
+    let bridge_wrapper = BridgeWrapper::new(config, device, ethaddr, max_ports, ts);
 
     *global_bridge = Some(bridge_wrapper);
     Ok(())

@@ -1,40 +1,20 @@
+mod bridge_config;
+
 use std::sync::Mutex;
 use std::time::Duration;
 use std::thread;
 
-use smoltcp::iface::{Config, Interface};
+use bridge_config::{get_bridge_mac, get_port1_mac, get_port2_mac, MAX_PORTS};
+use smoltcp::iface::Config;
 use smoltcp::phy::{Loopback, Medium};
 use smoltcp::time::Instant;
 use smoltcp::wire::bridge::BridgeWrapper;
 use smoltcp::wire::bridge_device::BridgeDevice;
 use smoltcp::wire::{EthernetAddress, EthernetFrame, EthernetProtocol, HardwareAddress, Ipv4Address, Ipv4Packet, UdpPacket};
 
-pub const BRIDGE_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x00];
-pub const PORT1_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x01];
-pub const PORT2_MAC: [u8; 6] = [0x02, 0x00, 0x00, 0x00, 0x00, 0x02];
-pub const MAX_PORTS: u8 = 2;
-
-// pub const SENDER_IP: Ipv4Address = Ipv4Address::new(192, 168, 0, 1);
-// pub const RECEIVER_IP: Ipv4Address = Ipv4Address::new(192, 168, 0, 2);
-// pub const SENDER_PORT: u16 = 12345;
-// pub const RECEIVER_PORT: u16 = 54321;
-
-pub fn get_bridge_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&BRIDGE_MAC)
-}
-
-pub fn get_port1_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT1_MAC)
-}
-
-pub fn get_port2_mac() -> EthernetAddress {
-    EthernetAddress::from_bytes(&PORT2_MAC)
-}
-
 // Global bridge variable
 lazy_static::lazy_static! {
     static ref BRIDGE: Mutex<BridgeWrapper> = {
-        let time = Instant::now();
         let device1 = Loopback::new(Medium::Ethernet);
         let device2 = Loopback::new(Medium::Ethernet);
         
@@ -44,13 +24,11 @@ lazy_static::lazy_static! {
         let config1 = Config::new(HardwareAddress::Ethernet(get_port1_mac()));
         let config2 = Config::new(HardwareAddress::Ethernet(get_port2_mac()));
 
-        // let iface1 = Interface::new(config1, &mut device1, time);
-        // let iface2 = Interface::new(config2, &mut device2, time);
-
         let bridge_config = Config::new(HardwareAddress::Ethernet(get_bridge_mac()));
 
         let bridge = BridgeWrapper::new(
-            Interface::new(bridge_config, &mut Loopback::new(Medium::Ethernet), time),
+            bridge_config,
+            Loopback::new(Medium::Ethernet),
             get_bridge_mac(),
             MAX_PORTS,
             Instant::now(),

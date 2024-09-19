@@ -72,6 +72,16 @@ impl Instant {
         Self::from(::std::time::SystemTime::now())
     }
 
+    #[cfg(feature = "std")]
+    pub fn elapsed(&self) -> Duration {
+        Instant::now() - *self
+    }
+
+    // #[cfg(feature = "std")]
+    // pub fn duration_since(&self, ts: Instant) -> Duration {
+    //     Duration::from_micros(0)
+    // }
+
     /// The fractional number of milliseconds that have passed
     /// since the beginning of time.
     pub const fn millis(&self) -> i64 {

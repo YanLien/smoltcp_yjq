@@ -274,25 +274,9 @@ required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interfac
 name = "network-bridgers"
 required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
 
-# [[example]]
-# name = "bridge-receiver"
-# required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
-
-# [[example]]
-# name = "bridge-sender"
-# required-features = ["std", "medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
-
-# [[example]]
-# name = "bridge"
-# required-features = ["medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp"]
-
 [[example]]
 name = "udp_server"
 required-features = ["medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"]
-
-# [[example]]
-# name = "bridge_udp"
-# required-features = ["medium-ethernet", "medium-ip", "phy-tuntap_interface", "proto-ipv4", "proto-ipv6", "socket-tcp"]
 
 [[example]]
 name = "packet2pcap"
