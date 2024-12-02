@@ -158,7 +158,7 @@ pub mod config {
 #[cfg(any(
     feature = "medium-ethernet",
     feature = "medium-ip",
-    feature = "medium-ieee802154"
+    feature = "medium-ieee802154",
 ))]
 pub mod iface;
 
